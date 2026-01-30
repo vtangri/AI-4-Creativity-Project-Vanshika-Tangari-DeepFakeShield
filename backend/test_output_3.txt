@@ -1,0 +1,1819 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.0, pytest-9.0.2, pluggy-1.6.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13
+cachedir: .pytest_cache
+rootdir: /Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend
+configfile: pytest.ini
+plugins: anyio-4.12.1, asyncio-1.3.0, cov-7.0.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_api.py::TestAuth::test_register_user FAILED                   [100%]
+
+=================================== FAILURES ===================================
+_________________________ TestAuth.test_register_user __________________________
+
+self = <starlette.middleware.errors.ServerErrorMiddleware object at 0x1072ab4d0>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function _TestClientTransport.handle_request.<locals>.send at 0x10733b420>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+    
+        response_started = False
+    
+        async def _send(message: Message) -> None:
+            nonlocal response_started, send
+    
+            if message["type"] == "http.response.start":
+                response_started = True
+            await send(message)
+    
+        try:
+>           await self.app(scope, receive, _send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/middleware/errors.py:164: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.middleware.cors.CORSMiddleware object at 0x1072ab380>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function ServerErrorMiddleware.__call__.<locals>._send at 0x10733ba60>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":  # pragma: no cover
+            await self.app(scope, receive, send)
+            return
+    
+        method = scope["method"]
+        headers = Headers(scope=scope)
+        origin = headers.get("origin")
+    
+        if origin is None:
+>           await self.app(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/middleware/cors.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.middleware.exceptions.ExceptionMiddleware object at 0x1072ab230>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function ServerErrorMiddleware.__call__.<locals>._send at 0x10733ba60>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] not in ("http", "websocket"):
+            await self.app(scope, receive, send)
+            return
+    
+        scope["starlette.exception_handlers"] = (
+            self._exception_handlers,
+            self._status_handlers,
+        )
+    
+        conn: Request | WebSocket
+        if scope["type"] == "http":
+            conn = Request(scope, receive, send)
+        else:
+            conn = WebSocket(scope, receive, send)
+    
+>       await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/middleware/exceptions.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function ServerErrorMiddleware.__call__.<locals>._send at 0x10733ba60>
+
+    async def wrapped_app(scope: Scope, receive: Receive, send: Send) -> None:
+        response_started = False
+    
+        async def sender(message: Message) -> None:
+            nonlocal response_started
+    
+            if message["type"] == "http.response.start":
+                response_started = True
+            await send(message)
+    
+        try:
+            await app(scope, receive, sender)
+        except Exception as exc:
+            handler = None
+    
+            if isinstance(exc, HTTPException):
+                handler = status_handlers.get(exc.status_code)
+    
+            if handler is None:
+                handler = _lookup_exception_handler(exception_handlers, exc)
+    
+            if handler is None:
+>               raise exc
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function ServerErrorMiddleware.__call__.<locals>._send at 0x10733ba60>
+
+    async def wrapped_app(scope: Scope, receive: Receive, send: Send) -> None:
+        response_started = False
+    
+        async def sender(message: Message) -> None:
+            nonlocal response_started
+    
+            if message["type"] == "http.response.start":
+                response_started = True
+            await send(message)
+    
+        try:
+>           await app(scope, receive, sender)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x1072ab0e0>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bba0>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        async with AsyncExitStack() as stack:
+            scope[self.context_name] = stack
+>           await self.app(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <fastapi.routing.APIRouter object at 0x1072f58c0>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bba0>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        """
+        The main entry point to the Router class.
+        """
+>       await self.middleware_stack(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/routing.py:716: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <fastapi.routing.APIRouter object at 0x1072f58c0>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bba0>
+
+    async def app(self, scope: Scope, receive: Receive, send: Send) -> None:
+        assert scope["type"] in ("http", "websocket", "lifespan")
+    
+        if "router" not in scope:
+            scope["router"] = self
+    
+        if scope["type"] == "lifespan":
+            await self.lifespan(scope, receive, send)
+            return
+    
+        partial = None
+    
+        for route in self.routes:
+            # Determine if any route matches the incoming scope,
+            # and hand over to the matching route if found.
+            match, child_scope = route.matches(scope)
+            if match == Match.FULL:
+                scope.update(child_scope)
+>               await route.handle(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/routing.py:736: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = APIRoute(path='/api/v1/auth/register', name='register', methods=['POST'])
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bba0>
+
+    async def handle(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if self.methods and scope["method"] not in self.methods:
+            headers = {"Allow": ", ".join(self.methods)}
+            if "app" in scope:
+                raise HTTPException(status_code=405, headers=headers)
+            else:
+                response = PlainTextResponse("Method Not Allowed", status_code=405, headers=headers)
+            await response(scope, receive, send)
+        else:
+>           await self.app(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/routing.py:290: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bba0>
+
+    async def app(scope: Scope, receive: Receive, send: Send) -> None:
+        request = Request(scope, receive, send)
+    
+        async def app(scope: Scope, receive: Receive, send: Send) -> None:
+            # Starts customization
+            response_awaited = False
+            async with AsyncExitStack() as request_stack:
+                scope["fastapi_inner_astack"] = request_stack
+                async with AsyncExitStack() as function_stack:
+                    scope["fastapi_function_astack"] = function_stack
+                    response = await f(request)
+                await response(scope, receive, send)
+                # Continues customization
+                response_awaited = True
+            if not response_awaited:
+                raise FastAPIError(
+                    "Response not awaited. There's a high chance that the "
+                    "application code is raising an exception and a dependency with yield "
+                    "has a block with a bare except, or a block with except Exception, "
+                    "and is not raising the exception again. Read more about it in the "
+                    "docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except"
+                )
+    
+        # Same as in Starlette
+>       await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bba0>
+
+    async def wrapped_app(scope: Scope, receive: Receive, send: Send) -> None:
+        response_started = False
+    
+        async def sender(message: Message) -> None:
+            nonlocal response_started
+    
+            if message["type"] == "http.response.start":
+                response_started = True
+            await send(message)
+    
+        try:
+            await app(scope, receive, sender)
+        except Exception as exc:
+            handler = None
+    
+            if isinstance(exc, HTTPException):
+                handler = status_handlers.get(exc.status_code)
+    
+            if handler is None:
+                handler = _lookup_exception_handler(exception_handlers, exc)
+    
+            if handler is None:
+>               raise exc
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bba0>
+
+    async def wrapped_app(scope: Scope, receive: Receive, send: Send) -> None:
+        response_started = False
+    
+        async def sender(message: Message) -> None:
+            nonlocal response_started
+    
+            if message["type"] == "http.response.start":
+                response_started = True
+            await send(message)
+    
+        try:
+>           await app(scope, receive, sender)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10733bd80>
+
+    async def app(scope: Scope, receive: Receive, send: Send) -> None:
+        # Starts customization
+        response_awaited = False
+        async with AsyncExitStack() as request_stack:
+            scope["fastapi_inner_astack"] = request_stack
+            async with AsyncExitStack() as function_stack:
+                scope["fastapi_function_astack"] = function_stack
+>               response = await f(request)
+                           ^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+request = <starlette.requests.Request object at 0x107303d90>
+
+    async def app(request: Request) -> Response:
+        response: Union[Response, None] = None
+        file_stack = request.scope.get("fastapi_middleware_astack")
+        assert isinstance(file_stack, AsyncExitStack), (
+            "fastapi_middleware_astack not found in request scope"
+        )
+    
+        # Extract endpoint context for error messages
+        endpoint_ctx = (
+            _extract_endpoint_context(dependant.call)
+            if dependant.call
+            else EndpointContext()
+        )
+    
+        if dependant.path:
+            # For mounted sub-apps, include the mount path prefix
+            mount_path = request.scope.get("root_path", "").rstrip("/")
+            endpoint_ctx["path"] = f"{request.method} {mount_path}{dependant.path}"
+    
+        # Read body and auto-close files
+        try:
+            body: Any = None
+            if body_field:
+                if is_body_form:
+                    body = await request.form()
+                    file_stack.push_async_callback(body.close)
+                else:
+                    body_bytes = await request.body()
+                    if body_bytes:
+                        json_body: Any = Undefined
+                        content_type_value = request.headers.get("content-type")
+                        if not content_type_value:
+                            json_body = await request.json()
+                        else:
+                            message = email.message.Message()
+                            message["content-type"] = content_type_value
+                            if message.get_content_maintype() == "application":
+                                subtype = message.get_content_subtype()
+                                if subtype == "json" or subtype.endswith("+json"):
+                                    json_body = await request.json()
+                        if json_body != Undefined:
+                            body = json_body
+                        else:
+                            body = body_bytes
+        except json.JSONDecodeError as e:
+            validation_error = RequestValidationError(
+                [
+                    {
+                        "type": "json_invalid",
+                        "loc": ("body", e.pos),
+                        "msg": "JSON decode error",
+                        "input": {},
+                        "ctx": {"error": e.msg},
+                    }
+                ],
+                body=e.doc,
+                endpoint_ctx=endpoint_ctx,
+            )
+            raise validation_error from e
+        except HTTPException:
+            # If a middleware raises an HTTPException, it should be raised again
+            raise
+        except Exception as e:
+            http_error = HTTPException(
+                status_code=400, detail="There was an error parsing the body"
+            )
+            raise http_error from e
+    
+        # Solve dependencies and run path operation function, auto-closing dependencies
+        errors: list[Any] = []
+        async_exit_stack = request.scope.get("fastapi_inner_astack")
+        assert isinstance(async_exit_stack, AsyncExitStack), (
+            "fastapi_inner_astack not found in request scope"
+        )
+        solved_result = await solve_dependencies(
+            request=request,
+            dependant=dependant,
+            body=body,
+            dependency_overrides_provider=dependency_overrides_provider,
+            async_exit_stack=async_exit_stack,
+            embed_body_fields=embed_body_fields,
+        )
+        errors = solved_result.errors
+        if not errors:
+>           raw_response = await run_endpoint_function(
+                dependant=dependant,
+                values=solved_result.values,
+                is_coroutine=is_coroutine,
+            )
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py:355: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def run_endpoint_function(
+        *, dependant: Dependant, values: dict[str, Any], is_coroutine: bool
+    ) -> Any:
+        # Only called by get_request_handler. Has been split into its own function to
+        # facilitate profiling endpoints, since inner functions are harder to profile.
+        assert dependant.call is not None, "dependant.call must be a function"
+    
+        if is_coroutine:
+>           return await dependant.call(**values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py:243: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+user_data = UserCreate(email='newuser@example.com', password='securepass123', full_name='New User')
+db = <sqlalchemy.ext.asyncio.session.AsyncSession object at 0x106de6cf0>
+
+    @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+    async def register(
+        user_data: UserCreate,
+        db: AsyncSession = Depends(get_async_db)
+    ):
+        """Register a new user."""
+        # Check if email exists
+        result = await db.execute(
+            select(User).where(User.email == user_data.email)
+        )
+        if result.scalar_one_or_none():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email already registered"
+            )
+    
+        # Create user
+        user = User(
+            email=user_data.email,
+>           hashed_password=get_password_hash(user_data.password),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            full_name=user_data.full_name
+        )
+
+app/api/routes/auth.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+password = 'securepass123'
+
+    def get_password_hash(password: str) -> str:
+        """Hash a password."""
+>       return pwd_context.hash(password)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app/core/security.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <CryptContext at 0x1067074d0>, secret = 'securepass123', scheme = None
+category = None, kwds = {}
+record = <class 'passlib.handlers.bcrypt.<customized bcrypt hasher>'>
+strip_unused = None
+
+    def hash(self, secret, scheme=None, category=None, **kwds):
+        """run secret through selected algorithm, returning resulting hash.
+    
+        :type secret: unicode or bytes
+        :arg secret:
+            the password to hash.
+    
+        :type scheme: str or None
+        :param scheme:
+    
+            Optional scheme to use. Scheme must be one of the ones
+            configured for this context (see the
+            :ref:`schemes <context-schemes-option>` option).
+            If no scheme is specified, the configured default
+            will be used.
+    
+            .. deprecated:: 1.7
+    
+                Support for this keyword is deprecated, and will be removed in Passlib 2.0.
+    
+        :type category: str or None
+        :param category:
+            Optional :ref:`user category <user-categories>`.
+            If specified, this will cause any category-specific defaults to
+            be used when hashing the password (e.g. different default scheme,
+            different default rounds values, etc).
+    
+        :param \\*\\*kwds:
+            All other keyword options are passed to the selected algorithm's
+            :meth:`PasswordHash.hash() <passlib.ifc.PasswordHash.hash>` method.
+    
+        :returns:
+            The secret as encoded by the specified algorithm and options.
+            The return value will always be a :class:`!str`.
+    
+        :raises TypeError, ValueError:
+            * If any of the arguments have an invalid type or value.
+              This includes any keywords passed to the underlying hash's
+              :meth:`PasswordHash.hash() <passlib.ifc.PasswordHash.hash>` method.
+    
+        .. seealso:: the :ref:`context-basic-example` example in the tutorial
+        """
+        # XXX: could insert normalization to preferred unicode encoding here
+        if scheme is not None:
+            # TODO: offer replacement alternative.
+            #       ``context.handler(scheme).hash()`` would work,
+            #       but may deprecate .handler() in passlib 1.8.
+            warn("CryptContext.hash(): 'scheme' keyword is deprecated as of "
+                 "Passlib 1.7, and will be removed in Passlib 2.0",
+                 DeprecationWarning)
+        record = self._get_record(scheme, category)
+        strip_unused = self._strip_unused_context_kwds
+        if strip_unused:
+            strip_unused(kwds, record)
+>       return record.hash(secret, **kwds)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/context.py:2258: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt.<customized bcrypt hasher>'>
+secret = 'securepass123', kwds = {}
+self = <passlib.handlers.bcrypt.<customized bcrypt hasher> object at 0x1073946e0>
+
+    @classmethod
+    def hash(cls, secret, **kwds):
+        if kwds:
+            # Deprecating passing any settings keywords via .hash() as of passlib 1.7; everything
+            # should use .using().hash() instead.  If any keywords are specified, presume they're
+            # context keywords by default (the common case), and extract out any settings kwds.
+            # Support for passing settings via .hash() will be removed in Passlib 2.0, along with
+            # this block of code.
+            settings = extract_settings_kwds(cls, kwds)
+            if settings:
+                warn_hash_settings_deprecation(cls, settings)
+                return cls.using(**settings).hash(secret, **kwds)
+        # NOTE: at this point, 'kwds' should just contain context_kwds subset
+        validate_secret(secret)
+        self = cls(use_defaults=True, **kwds)
+>       self.checksum = self._calc_checksum(secret)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <passlib.handlers.bcrypt.<customized bcrypt hasher> object at 0x1073946e0>
+secret = 'securepass123'
+
+    def _calc_checksum(self, secret):
+>       self._stub_requires_backend()
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py:591: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt.<customized bcrypt hasher>'>
+
+    @classmethod
+    def _stub_requires_backend(cls):
+        """
+        helper for subclasses to create stub methods which auto-load backend.
+        """
+        if cls.__backend:
+            raise AssertionError("%s: _finalize_backend(%r) failed to replace lazy loader" %
+                                 (cls.name, cls.__backend))
+>       cls.set_backend()
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:2254: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt.<customized bcrypt hasher>'>, name = 'any'
+dryrun = False
+
+    @classmethod
+    def set_backend(cls, name="any", dryrun=False):
+        """
+        Load specified backend.
+    
+        :arg name:
+            name of backend to load, can be any of the following:
+    
+            * ``"any"`` -- use current backend if one is loaded,
+              otherwise load the first available backend.
+    
+            * ``"default"`` -- use the first available backend.
+    
+            * any string in :attr:`backends`, loads specified backend.
+    
+        :param dryrun:
+            If True, this perform all setup actions *except* switching over to the new backend.
+            (this flag is used to implement :meth:`has_backend`).
+    
+            .. versionadded:: 1.7
+    
+        :raises ValueError:
+            If backend name is unknown.
+    
+        :raises passlib.exc.MissingBackendError:
+            If specific backend is missing;
+            or in the case of ``"any"`` / ``"default"``, if *no* backends are available.
+    
+        :raises passlib.exc.PasslibSecurityError:
+    
+            If ``"any"`` or ``"default"`` was specified,
+            but the only backend available has a PasslibSecurityError.
+        """
+        # check if active backend is acceptable
+        if (name == "any" and cls.__backend) or (name and name == cls.__backend):
+            return cls.__backend
+    
+        # if this isn't the final subclass, whose bases we can modify,
+        # find that class, and recursively call this method for the proper class.
+        owner = cls._get_backend_owner()
+        if owner is not cls:
+>           return owner.set_backend(name, dryrun=dryrun)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:2156: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt.bcrypt'>, name = 'bcrypt', dryrun = False
+
+    @classmethod
+    def set_backend(cls, name="any", dryrun=False):
+        """
+        Load specified backend.
+    
+        :arg name:
+            name of backend to load, can be any of the following:
+    
+            * ``"any"`` -- use current backend if one is loaded,
+              otherwise load the first available backend.
+    
+            * ``"default"`` -- use the first available backend.
+    
+            * any string in :attr:`backends`, loads specified backend.
+    
+        :param dryrun:
+            If True, this perform all setup actions *except* switching over to the new backend.
+            (this flag is used to implement :meth:`has_backend`).
+    
+            .. versionadded:: 1.7
+    
+        :raises ValueError:
+            If backend name is unknown.
+    
+        :raises passlib.exc.MissingBackendError:
+            If specific backend is missing;
+            or in the case of ``"any"`` / ``"default"``, if *no* backends are available.
+    
+        :raises passlib.exc.PasslibSecurityError:
+    
+            If ``"any"`` or ``"default"`` was specified,
+            but the only backend available has a PasslibSecurityError.
+        """
+        # check if active backend is acceptable
+        if (name == "any" and cls.__backend) or (name and name == cls.__backend):
+            return cls.__backend
+    
+        # if this isn't the final subclass, whose bases we can modify,
+        # find that class, and recursively call this method for the proper class.
+        owner = cls._get_backend_owner()
+        if owner is not cls:
+            return owner.set_backend(name, dryrun=dryrun)
+    
+        # pick first available backend
+        if name == "any" or name == "default":
+            default_error = None
+            for name in cls.backends:
+                try:
+>                   return cls.set_backend(name, dryrun=dryrun)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:2163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt.bcrypt'>, name = 'bcrypt', dryrun = False
+
+    @classmethod
+    def set_backend(cls, name="any", dryrun=False):
+        """
+        Load specified backend.
+    
+        :arg name:
+            name of backend to load, can be any of the following:
+    
+            * ``"any"`` -- use current backend if one is loaded,
+              otherwise load the first available backend.
+    
+            * ``"default"`` -- use the first available backend.
+    
+            * any string in :attr:`backends`, loads specified backend.
+    
+        :param dryrun:
+            If True, this perform all setup actions *except* switching over to the new backend.
+            (this flag is used to implement :meth:`has_backend`).
+    
+            .. versionadded:: 1.7
+    
+        :raises ValueError:
+            If backend name is unknown.
+    
+        :raises passlib.exc.MissingBackendError:
+            If specific backend is missing;
+            or in the case of ``"any"`` / ``"default"``, if *no* backends are available.
+    
+        :raises passlib.exc.PasslibSecurityError:
+    
+            If ``"any"`` or ``"default"`` was specified,
+            but the only backend available has a PasslibSecurityError.
+        """
+        # check if active backend is acceptable
+        if (name == "any" and cls.__backend) or (name and name == cls.__backend):
+            return cls.__backend
+    
+        # if this isn't the final subclass, whose bases we can modify,
+        # find that class, and recursively call this method for the proper class.
+        owner = cls._get_backend_owner()
+        if owner is not cls:
+            return owner.set_backend(name, dryrun=dryrun)
+    
+        # pick first available backend
+        if name == "any" or name == "default":
+            default_error = None
+            for name in cls.backends:
+                try:
+                    return cls.set_backend(name, dryrun=dryrun)
+                except exc.MissingBackendError:
+                    continue
+                except exc.PasslibSecurityError as err:
+                    # backend is available, but refuses to load due to security issue.
+                    if default_error is None:
+                        default_error = err
+                    continue
+            if default_error is None:
+                msg = "%s: no backends available" % cls.name
+                if cls._no_backend_suggestion:
+                    msg += cls._no_backend_suggestion
+                default_error = exc.MissingBackendError(msg)
+            raise default_error
+    
+        # validate name
+        if name not in cls.backends:
+            raise exc.UnknownBackendError(cls, name)
+    
+        # hand off to _set_backend()
+        with _backend_lock:
+            orig = cls._pending_backend, cls._pending_dry_run
+            try:
+                cls._pending_backend = name
+                cls._pending_dry_run = dryrun
+>               cls._set_backend(name, dryrun)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:2188: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt.bcrypt'>, name = 'bcrypt', dryrun = False
+
+    @classmethod
+    def _set_backend(cls, name, dryrun):
+        # invoke backend loader (will throw error if fails)
+>       super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:2311: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt.bcrypt'>, name = 'bcrypt', dryrun = False
+
+    @classmethod
+    def _set_backend(cls, name, dryrun):
+        """
+        Internal method invoked by :meth:`set_backend`.
+        handles actual loading of specified backend.
+    
+        global _backend_lock will be held for duration of this method,
+        and _pending_dry_run & _pending_backend will also be set.
+    
+        should return True / False.
+        """
+        loader = cls._get_backend_loader(name)
+        kwds = {}
+        if accepts_keyword(loader, "name"):
+            kwds['name'] = name
+        if accepts_keyword(loader, "dryrun"):
+            kwds['dryrun'] = dryrun
+>       ok = loader(**kwds)
+             ^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:2224: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+mixin_cls = <class 'passlib.handlers.bcrypt._BcryptBackend'>, name = 'bcrypt'
+dryrun = False
+
+    @classmethod
+    def _load_backend_mixin(mixin_cls, name, dryrun):
+        # try to import bcrypt
+        global _bcrypt
+        if _detect_pybcrypt():
+            # pybcrypt was installed instead
+            return False
+        try:
+            import bcrypt as _bcrypt
+        except ImportError: # pragma: no cover
+            return False
+        try:
+            version = _bcrypt.__about__.__version__
+        except:
+            log.warning("(trapped) error reading bcrypt version", exc_info=True)
+            version = '<unknown>'
+    
+        log.debug("detected 'bcrypt' backend, version %r", version)
+>       return mixin_cls._finalize_backend_mixin(name, dryrun)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py:626: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+mixin_cls = <class 'passlib.handlers.bcrypt._BcryptBackend'>, backend = 'bcrypt'
+dryrun = False
+
+    @classmethod
+    def _finalize_backend_mixin(mixin_cls, backend, dryrun):
+        """
+        helper called by from backend mixin classes' _load_backend_mixin() --
+        invoked after backend imports have been loaded, and performs
+        feature detection & testing common to all backends.
+        """
+        #----------------------------------------------------------------
+        # setup helpers
+        #----------------------------------------------------------------
+        assert mixin_cls is bcrypt._backend_mixin_map[backend], \
+            "_configure_workarounds() invoked from wrong class"
+    
+        if mixin_cls._workrounds_initialized:
+            return True
+    
+        verify = mixin_cls.verify
+    
+        err_types = (ValueError, uh.exc.MissingBackendError)
+        if _bcryptor:
+            err_types += (_bcryptor.engine.SaltError,)
+    
+        def safe_verify(secret, hash):
+            """verify() wrapper which traps 'unknown identifier' errors"""
+            try:
+                return verify(secret, hash)
+            except err_types:
+                # backends without support for given ident will throw various
+                # errors about unrecognized version:
+                #   os_crypt -- internal code below throws
+                #       - PasswordValueError if there's encoding issue w/ password.
+                #       - InternalBackendError if crypt fails for unknown reason
+                #         (trapped below so we can debug it)
+                #   pybcrypt, bcrypt -- raises ValueError
+                #   bcryptor -- raises bcryptor.engine.SaltError
+                return NotImplemented
+            except uh.exc.InternalBackendError:
+                # _calc_checksum() code may also throw CryptBackendError
+                # if correct hash isn't returned (e.g. 2y hash converted to 2b,
+                # such as happens with bcrypt 3.0.0)
+                log.debug("trapped unexpected response from %r backend: verify(%r, %r):",
+                          backend, secret, hash, exc_info=True)
+                return NotImplemented
+    
+        def assert_lacks_8bit_bug(ident):
+            """
+            helper to check for cryptblowfish 8bit bug (fixed in 2y/2b);
+            even though it's not known to be present in any of passlib's backends.
+            this is treated as FATAL, because it can easily result in seriously malformed hashes,
+            and we can't correct for it ourselves.
+    
+            test cases from <http://cvsweb.openwall.com/cgi/cvsweb.cgi/Owl/packages/glibc/crypt_blowfish/wrapper.c.diff?r1=1.9;r2=1.10>
+            reference hash is the incorrectly generated $2x$ hash taken from above url
+            """
+            # NOTE: passlib 1.7.2 and earlier used the commented-out LATIN-1 test vector to detect
+            #       this bug; but python3's crypt.crypt() only supports unicode inputs (and
+            #       always encodes them as UTF8 before passing to crypt); so passlib 1.7.3
+            #       switched to the UTF8-compatible test vector below.  This one's bug_hash value
+            #       ("$2x$...rcAS") was drawn from the same openwall source (above); and the correct
+            #       hash ("$2a$...X6eu") was generated by passing the raw bytes to python2's
+            #       crypt.crypt() using OpenBSD 6.7 (hash confirmed as same for $2a$ & $2b$).
+    
+            # LATIN-1 test vector
+            # secret = b"\xA3"
+            # bug_hash = ident.encode("ascii") + b"05$/OK.fbVrR/bpIqNJ5ianF.CE5elHaaO4EbggVDjb8P19RukzXSM3e"
+            # correct_hash = ident.encode("ascii") + b"05$/OK.fbVrR/bpIqNJ5ianF.Sa7shbm4.OzKpvFnX1pQLmQW96oUlCq"
+    
+            # UTF-8 test vector
+            secret = b"\xd1\x91"  # aka "\u0451"
+            bug_hash = ident.encode("ascii") + b"05$6bNw2HLQYeqHYyBfLMsv/OiwqTymGIGzFsA4hOTWebfehXHNprcAS"
+            correct_hash = ident.encode("ascii") + b"05$6bNw2HLQYeqHYyBfLMsv/OUcZd0LKP39b87nBw3.S2tVZSqiQX6eu"
+    
+            if verify(secret, bug_hash):
+                # NOTE: this only EVER be observed in (broken) 2a and (backward-compat) 2x hashes
+                #       generated by crypt_blowfish library. 2y/2b hashes should not have the bug
+                #       (but we check w/ them anyways).
+                raise PasslibSecurityError(
+                    "passlib.hash.bcrypt: Your installation of the %r backend is vulnerable to "
+                    "the crypt_blowfish 8-bit bug (CVE-2011-2483) under %r hashes, "
+                    "and should be upgraded or replaced with another backend" % (backend, ident))
+    
+            # it doesn't have wraparound bug, but make sure it *does* verify against the correct
+            # hash, or we're in some weird third case!
+            if not verify(secret, correct_hash):
+                raise RuntimeError("%s backend failed to verify %s 8bit hash" % (backend, ident))
+    
+        def detect_wrap_bug(ident):
+            """
+            check for bsd wraparound bug (fixed in 2b)
+            this is treated as a warning, because it's rare in the field,
+            and pybcrypt (as of 2015-7-21) is unpatched, but some people may be stuck with it.
+    
+            test cases from <http://www.openwall.com/lists/oss-security/2012/01/02/4>
+    
+            NOTE: reference hash is of password "0"*72
+    
+            NOTE: if in future we need to deliberately create hashes which have this bug,
+                  can use something like 'hashpw(repeat_string(secret[:((1+secret) % 256) or 1]), 72)'
+            """
+            # check if it exhibits wraparound bug
+            secret = (b"0123456789"*26)[:255]
+            bug_hash = ident.encode("ascii") + b"04$R1lJ2gkNaoPGdafE.H.16.nVyh2niHsGJhayOHLMiXlI45o8/DU.6"
+            if verify(secret, bug_hash):
+                return True
+    
+            # if it doesn't have wraparound bug, make sure it *does* handle things
+            # correctly -- or we're in some weird third case.
+            correct_hash = ident.encode("ascii") + b"04$R1lJ2gkNaoPGdafE.H.16.1MKHPvmKwryeulRe225LKProWYwt9Oi"
+            if not verify(secret, correct_hash):
+                raise RuntimeError("%s backend failed to verify %s wraparound hash" % (backend, ident))
+    
+            return False
+    
+        def assert_lacks_wrap_bug(ident):
+            if not detect_wrap_bug(ident):
+                return
+            # should only see in 2a, later idents should NEVER exhibit this bug:
+            # * 2y implementations should have been free of it
+            # * 2b was what (supposedly) fixed it
+            raise RuntimeError("%s backend unexpectedly has wraparound bug for %s" % (backend, ident))
+    
+        #----------------------------------------------------------------
+        # check for old 20 support
+        #----------------------------------------------------------------
+        test_hash_20 = b"$2$04$5BJqKfqMQvV7nS.yUguNcuRfMMOXK0xPWavM7pOzjEi5ze5T1k8/S"
+        result = safe_verify("test", test_hash_20)
+        if result is NotImplemented:
+            mixin_cls._lacks_20_support = True
+            log.debug("%r backend lacks $2$ support, enabling workaround", backend)
+        elif not result:
+            raise RuntimeError("%s incorrectly rejected $2$ hash" % backend)
+    
+        #----------------------------------------------------------------
+        # check for 2a support
+        #----------------------------------------------------------------
+        result = safe_verify("test", TEST_HASH_2A)
+        if result is NotImplemented:
+            # 2a support is required, and should always be present
+            raise RuntimeError("%s lacks support for $2a$ hashes" % backend)
+        elif not result:
+            raise RuntimeError("%s incorrectly rejected $2a$ hash" % backend)
+        else:
+            assert_lacks_8bit_bug(IDENT_2A)
+>           if detect_wrap_bug(IDENT_2A):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ident = '$2a$'
+
+    def detect_wrap_bug(ident):
+        """
+        check for bsd wraparound bug (fixed in 2b)
+        this is treated as a warning, because it's rare in the field,
+        and pybcrypt (as of 2015-7-21) is unpatched, but some people may be stuck with it.
+    
+        test cases from <http://www.openwall.com/lists/oss-security/2012/01/02/4>
+    
+        NOTE: reference hash is of password "0"*72
+    
+        NOTE: if in future we need to deliberately create hashes which have this bug,
+              can use something like 'hashpw(repeat_string(secret[:((1+secret) % 256) or 1]), 72)'
+        """
+        # check if it exhibits wraparound bug
+        secret = (b"0123456789"*26)[:255]
+        bug_hash = ident.encode("ascii") + b"04$R1lJ2gkNaoPGdafE.H.16.nVyh2niHsGJhayOHLMiXlI45o8/DU.6"
+>       if verify(secret, bug_hash):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py:380: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'passlib.handlers.bcrypt._BcryptBackend'>
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+hash = b'$2a$04$R1lJ2gkNaoPGdafE.H.16.nVyh2niHsGJhayOHLMiXlI45o8/DU.6'
+context = {}
+self = <passlib.handlers.bcrypt._BcryptBackend object at 0x107382fd0>
+chk = 'nVyh2niHsGJhayOHLMiXlI45o8/DU.6'
+
+    @classmethod
+    def verify(cls, secret, hash, **context):
+        # NOTE: classes with multiple checksum encodings should either
+        # override this method, or ensure that from_string() / _norm_checksum()
+        # ensures .checksum always uses a single canonical representation.
+        validate_secret(secret)
+        self = cls.from_string(hash, **context)
+        chk = self.checksum
+        if chk is None:
+            raise exc.MissingDigestError(cls)
+>       return consteq(self._calc_checksum(secret), chk)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py:792: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <passlib.handlers.bcrypt._BcryptBackend object at 0x107382fd0>
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+>       hash = _bcrypt.hashpw(secret, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py:655: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_api.TestAuth object at 0x106e96990>
+client = <starlette.testclient.TestClient object at 0x1072a9a90>
+
+    def test_register_user(self, client):
+>       response = client.post("/api/v1/auth/register", json={
+            "email": "newuser@example.com",
+            "password": "securepass123",
+            "full_name": "New User"
+        })
+
+tests/test_api.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>
+url = '/api/v1/auth/register'
+
+    def post(  # type: ignore[override]
+        self,
+        url: httpx._types.URLTypes,
+        *,
+        content: httpx._types.RequestContent | None = None,
+        data: _RequestData | None = None,
+        files: httpx._types.RequestFiles | None = None,
+        json: Any = None,
+        params: httpx._types.QueryParamTypes | None = None,
+        headers: httpx._types.HeaderTypes | None = None,
+        cookies: httpx._types.CookieTypes | None = None,
+        auth: httpx._types.AuthTypes | httpx._client.UseClientDefault = httpx._client.USE_CLIENT_DEFAULT,
+        follow_redirects: bool | httpx._client.UseClientDefault = httpx._client.USE_CLIENT_DEFAULT,
+        timeout: httpx._types.TimeoutTypes | httpx._client.UseClientDefault = httpx._client.USE_CLIENT_DEFAULT,
+        extensions: dict[str, Any] | None = None,
+    ) -> httpx.Response:
+>       return super().post(
+            url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/testclient.py:546: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>
+url = '/api/v1/auth/register'
+
+    def post(
+        self,
+        url: URL | str,
+        *,
+        content: RequestContent | None = None,
+        data: RequestData | None = None,
+        files: RequestFiles | None = None,
+        json: typing.Any | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Send a `POST` request.
+    
+        **Parameters**: See `httpx.request`.
+        """
+>       return self.request(
+            "POST",
+            url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py:1144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>, method = 'POST'
+url = URL('http://testserver/api/v1/auth/register')
+
+    def request(  # type: ignore[override]
+        self,
+        method: str,
+        url: httpx._types.URLTypes,
+        *,
+        content: httpx._types.RequestContent | None = None,
+        data: _RequestData | None = None,
+        files: httpx._types.RequestFiles | None = None,
+        json: Any = None,
+        params: httpx._types.QueryParamTypes | None = None,
+        headers: httpx._types.HeaderTypes | None = None,
+        cookies: httpx._types.CookieTypes | None = None,
+        auth: httpx._types.AuthTypes | httpx._client.UseClientDefault = httpx._client.USE_CLIENT_DEFAULT,
+        follow_redirects: bool | httpx._client.UseClientDefault = httpx._client.USE_CLIENT_DEFAULT,
+        timeout: httpx._types.TimeoutTypes | httpx._client.UseClientDefault = httpx._client.USE_CLIENT_DEFAULT,
+        extensions: dict[str, Any] | None = None,
+    ) -> httpx.Response:
+        if timeout is not httpx.USE_CLIENT_DEFAULT:
+            warnings.warn(
+                "You should not use the 'timeout' argument with the TestClient. "
+                "See https://github.com/Kludex/starlette/issues/1108 for more information.",
+                DeprecationWarning,
+            )
+        url = self._merge_url(url)
+>       return super().request(
+            method,
+            url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/testclient.py:445: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>, method = 'POST'
+url = URL('http://testserver/api/v1/auth/register')
+
+    def request(
+        self,
+        method: str,
+        url: URL | str,
+        *,
+        content: RequestContent | None = None,
+        data: RequestData | None = None,
+        files: RequestFiles | None = None,
+        json: typing.Any | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Build and send a request.
+    
+        Equivalent to:
+    
+        ```python
+        request = client.build_request(...)
+        response = client.send(request, ...)
+        ```
+    
+        See `Client.build_request()`, `Client.send()` and
+        [Merging of configuration][0] for how the various parameters
+        are merged with client-level configuration.
+    
+        [0]: /advanced/clients/#merging-of-configuration
+        """
+        if cookies is not None:
+            message = (
+                "Setting per-request cookies=<...> is being deprecated, because "
+                "the expected behaviour on cookie persistence is ambiguous. Set "
+                "cookies directly on the client instance instead."
+            )
+            warnings.warn(message, DeprecationWarning, stacklevel=2)
+    
+        request = self.build_request(
+            method=method,
+            url=url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            extensions=extensions,
+        )
+>       return self.send(request, auth=auth, follow_redirects=follow_redirects)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py:825: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>
+request = <Request('POST', 'http://testserver/api/v1/auth/register')>
+
+    def send(
+        self,
+        request: Request,
+        *,
+        stream: bool = False,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+    ) -> Response:
+        """
+        Send a request.
+    
+        The request is sent as-is, unmodified.
+    
+        Typically you'll want to build one with `Client.build_request()`
+        so that any client-level configuration is merged into the request,
+        but passing an explicit `httpx.Request()` is supported as well.
+    
+        See also: [Request instances][0]
+    
+        [0]: /advanced/clients/#request-instances
+        """
+        if self._state == ClientState.CLOSED:
+            raise RuntimeError("Cannot send a request, as the client has been closed.")
+    
+        self._state = ClientState.OPENED
+        follow_redirects = (
+            self.follow_redirects
+            if isinstance(follow_redirects, UseClientDefault)
+            else follow_redirects
+        )
+    
+        self._set_timeout(request)
+    
+        auth = self._build_request_auth(request, auth)
+    
+>       response = self._send_handling_auth(
+            request,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            history=[],
+        )
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py:914: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>
+request = <Request('POST', 'http://testserver/api/v1/auth/register')>
+auth = <httpx.Auth object at 0x1072abe00>, follow_redirects = True, history = []
+
+    def _send_handling_auth(
+        self,
+        request: Request,
+        auth: Auth,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        auth_flow = auth.sync_auth_flow(request)
+        try:
+            request = next(auth_flow)
+    
+            while True:
+>               response = self._send_handling_redirects(
+                    request,
+                    follow_redirects=follow_redirects,
+                    history=history,
+                )
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py:942: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>
+request = <Request('POST', 'http://testserver/api/v1/auth/register')>
+follow_redirects = True, history = []
+
+    def _send_handling_redirects(
+        self,
+        request: Request,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        while True:
+            if len(history) > self.max_redirects:
+                raise TooManyRedirects(
+                    "Exceeded maximum allowed redirects.", request=request
+                )
+    
+            for hook in self._event_hooks["request"]:
+                hook(request)
+    
+>           response = self._send_single_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py:979: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient.TestClient object at 0x1072a9a90>
+request = <Request('POST', 'http://testserver/api/v1/auth/register')>
+
+    def _send_single_request(self, request: Request) -> Response:
+        """
+        Sends a single request, without handling any redirections.
+        """
+        transport = self._transport_for_url(request.url)
+        start = time.perf_counter()
+    
+        if not isinstance(request.stream, SyncByteStream):
+            raise RuntimeError(
+                "Attempted to send an async request with a sync Client instance."
+            )
+    
+        with request_context(request=request):
+>           response = transport.handle_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py:1014: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient._TestClientTransport object at 0x1072a9be0>
+request = <Request('POST', 'http://testserver/api/v1/auth/register')>
+
+    def handle_request(self, request: httpx.Request) -> httpx.Response:
+        scheme = request.url.scheme
+        netloc = request.url.netloc.decode(encoding="ascii")
+        path = request.url.path
+        raw_path = request.url.raw_path
+        query = request.url.query.decode(encoding="ascii")
+    
+        default_port = {"http": 80, "ws": 80, "https": 443, "wss": 443}[scheme]
+    
+        if ":" in netloc:
+            host, port_string = netloc.split(":", 1)
+            port = int(port_string)
+        else:
+            host = netloc
+            port = default_port
+    
+        # Include the 'host' header.
+        if "host" in request.headers:
+            headers: list[tuple[bytes, bytes]] = []
+        elif port == default_port:  # pragma: no cover
+            headers = [(b"host", host.encode())]
+        else:  # pragma: no cover
+            headers = [(b"host", (f"{host}:{port}").encode())]
+    
+        # Include other request headers.
+        headers += [(key.lower().encode(), value.encode()) for key, value in request.headers.multi_items()]
+    
+        scope: dict[str, Any]
+    
+        if scheme in {"ws", "wss"}:
+            subprotocol = request.headers.get("sec-websocket-protocol", None)
+            if subprotocol is None:
+                subprotocols: Sequence[str] = []
+            else:
+                subprotocols = [value.strip() for value in subprotocol.split(",")]
+            scope = {
+                "type": "websocket",
+                "path": unquote(path),
+                "raw_path": raw_path.split(b"?", 1)[0],
+                "root_path": self.root_path,
+                "scheme": scheme,
+                "query_string": query.encode(),
+                "headers": headers,
+                "client": self.client,
+                "server": [host, port],
+                "subprotocols": subprotocols,
+                "state": self.app_state.copy(),
+                "extensions": {"websocket.http.response": {}},
+            }
+            session = WebSocketTestSession(self.app, scope, self.portal_factory)
+            raise _Upgrade(session)
+    
+        scope = {
+            "type": "http",
+            "http_version": "1.1",
+            "method": request.method,
+            "path": unquote(path),
+            "raw_path": raw_path.split(b"?", 1)[0],
+            "root_path": self.root_path,
+            "scheme": scheme,
+            "query_string": query.encode(),
+            "headers": headers,
+            "client": self.client,
+            "server": [host, port],
+            "extensions": {"http.response.debug": {}},
+            "state": self.app_state.copy(),
+        }
+    
+        request_complete = False
+        response_started = False
+        response_complete: anyio.Event
+        raw_kwargs: dict[str, Any] = {"stream": io.BytesIO()}
+        template = None
+        context = None
+    
+        async def receive() -> Message:
+            nonlocal request_complete
+    
+            if request_complete:
+                if not response_complete.is_set():
+                    await response_complete.wait()
+                return {"type": "http.disconnect"}
+    
+            body = request.read()
+            if isinstance(body, str):
+                body_bytes: bytes = body.encode("utf-8")  # pragma: no cover
+            elif body is None:
+                body_bytes = b""  # pragma: no cover
+            elif isinstance(body, GeneratorType):
+                try:  # pragma: no cover
+                    chunk = body.send(None)
+                    if isinstance(chunk, str):
+                        chunk = chunk.encode("utf-8")
+                    return {"type": "http.request", "body": chunk, "more_body": True}
+                except StopIteration:  # pragma: no cover
+                    request_complete = True
+                    return {"type": "http.request", "body": b""}
+            else:
+                body_bytes = body
+    
+            request_complete = True
+            return {"type": "http.request", "body": body_bytes}
+    
+        async def send(message: Message) -> None:
+            nonlocal raw_kwargs, response_started, template, context
+    
+            if message["type"] == "http.response.start":
+                assert not response_started, 'Received multiple "http.response.start" messages.'
+                raw_kwargs["status_code"] = message["status"]
+                raw_kwargs["headers"] = [(key.decode(), value.decode()) for key, value in message.get("headers", [])]
+                response_started = True
+            elif message["type"] == "http.response.body":
+                assert response_started, 'Received "http.response.body" without "http.response.start".'
+                assert not response_complete.is_set(), 'Received "http.response.body" after response completed.'
+                body = message.get("body", b"")
+                more_body = message.get("more_body", False)
+                if request.method != "HEAD":
+                    raw_kwargs["stream"].write(body)
+                if not more_body:
+                    raw_kwargs["stream"].seek(0)
+                    response_complete.set()
+            elif message["type"] == "http.response.debug":
+                template = message["info"]["template"]
+                context = message["info"]["context"]
+    
+        try:
+            with self.portal_factory() as portal:
+                response_complete = portal.call(anyio.Event)
+                portal.call(self.app, scope, receive, send)
+        except BaseException as exc:
+            if self.raise_server_exceptions:
+>               raise exc
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/testclient.py:348: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.testclient._TestClientTransport object at 0x1072a9be0>
+request = <Request('POST', 'http://testserver/api/v1/auth/register')>
+
+    def handle_request(self, request: httpx.Request) -> httpx.Response:
+        scheme = request.url.scheme
+        netloc = request.url.netloc.decode(encoding="ascii")
+        path = request.url.path
+        raw_path = request.url.raw_path
+        query = request.url.query.decode(encoding="ascii")
+    
+        default_port = {"http": 80, "ws": 80, "https": 443, "wss": 443}[scheme]
+    
+        if ":" in netloc:
+            host, port_string = netloc.split(":", 1)
+            port = int(port_string)
+        else:
+            host = netloc
+            port = default_port
+    
+        # Include the 'host' header.
+        if "host" in request.headers:
+            headers: list[tuple[bytes, bytes]] = []
+        elif port == default_port:  # pragma: no cover
+            headers = [(b"host", host.encode())]
+        else:  # pragma: no cover
+            headers = [(b"host", (f"{host}:{port}").encode())]
+    
+        # Include other request headers.
+        headers += [(key.lower().encode(), value.encode()) for key, value in request.headers.multi_items()]
+    
+        scope: dict[str, Any]
+    
+        if scheme in {"ws", "wss"}:
+            subprotocol = request.headers.get("sec-websocket-protocol", None)
+            if subprotocol is None:
+                subprotocols: Sequence[str] = []
+            else:
+                subprotocols = [value.strip() for value in subprotocol.split(",")]
+            scope = {
+                "type": "websocket",
+                "path": unquote(path),
+                "raw_path": raw_path.split(b"?", 1)[0],
+                "root_path": self.root_path,
+                "scheme": scheme,
+                "query_string": query.encode(),
+                "headers": headers,
+                "client": self.client,
+                "server": [host, port],
+                "subprotocols": subprotocols,
+                "state": self.app_state.copy(),
+                "extensions": {"websocket.http.response": {}},
+            }
+            session = WebSocketTestSession(self.app, scope, self.portal_factory)
+            raise _Upgrade(session)
+    
+        scope = {
+            "type": "http",
+            "http_version": "1.1",
+            "method": request.method,
+            "path": unquote(path),
+            "raw_path": raw_path.split(b"?", 1)[0],
+            "root_path": self.root_path,
+            "scheme": scheme,
+            "query_string": query.encode(),
+            "headers": headers,
+            "client": self.client,
+            "server": [host, port],
+            "extensions": {"http.response.debug": {}},
+            "state": self.app_state.copy(),
+        }
+    
+        request_complete = False
+        response_started = False
+        response_complete: anyio.Event
+        raw_kwargs: dict[str, Any] = {"stream": io.BytesIO()}
+        template = None
+        context = None
+    
+        async def receive() -> Message:
+            nonlocal request_complete
+    
+            if request_complete:
+                if not response_complete.is_set():
+                    await response_complete.wait()
+                return {"type": "http.disconnect"}
+    
+            body = request.read()
+            if isinstance(body, str):
+                body_bytes: bytes = body.encode("utf-8")  # pragma: no cover
+            elif body is None:
+                body_bytes = b""  # pragma: no cover
+            elif isinstance(body, GeneratorType):
+                try:  # pragma: no cover
+                    chunk = body.send(None)
+                    if isinstance(chunk, str):
+                        chunk = chunk.encode("utf-8")
+                    return {"type": "http.request", "body": chunk, "more_body": True}
+                except StopIteration:  # pragma: no cover
+                    request_complete = True
+                    return {"type": "http.request", "body": b""}
+            else:
+                body_bytes = body
+    
+            request_complete = True
+            return {"type": "http.request", "body": body_bytes}
+    
+        async def send(message: Message) -> None:
+            nonlocal raw_kwargs, response_started, template, context
+    
+            if message["type"] == "http.response.start":
+                assert not response_started, 'Received multiple "http.response.start" messages.'
+                raw_kwargs["status_code"] = message["status"]
+                raw_kwargs["headers"] = [(key.decode(), value.decode()) for key, value in message.get("headers", [])]
+                response_started = True
+            elif message["type"] == "http.response.body":
+                assert response_started, 'Received "http.response.body" without "http.response.start".'
+                assert not response_complete.is_set(), 'Received "http.response.body" after response completed.'
+                body = message.get("body", b"")
+                more_body = message.get("more_body", False)
+                if request.method != "HEAD":
+                    raw_kwargs["stream"].write(body)
+                if not more_body:
+                    raw_kwargs["stream"].seek(0)
+                    response_complete.set()
+            elif message["type"] == "http.response.debug":
+                template = message["info"]["template"]
+                context = message["info"]["context"]
+    
+        try:
+            with self.portal_factory() as portal:
+                response_complete = portal.call(anyio.Event)
+>               portal.call(self.app, scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/testclient.py:345: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <anyio.from_thread.BlockingPortal object at 0x1072aa510>
+func = <fastapi.applications.FastAPI object at 0x1072a9160>
+args = ({'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function ..._request.<locals>.receive at 0x106f005e0>, <function _TestClientTransport.handle_request.<locals>.send at 0x10733b420>)
+
+    def call(
+        self,
+        func: Callable[[Unpack[PosArgsT]], Awaitable[T_Retval] | T_Retval],
+        *args: Unpack[PosArgsT],
+    ) -> T_Retval:
+        """
+        Call the given function in the event loop thread.
+    
+        If the callable returns a coroutine object, it is awaited on.
+    
+        :param func: any callable
+        :raises RuntimeError: if the portal is not running or if this method is called
+            from within the event loop thread
+    
+        """
+>       return cast(T_Retval, self.start_task_soon(func, *args).result())
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/from_thread.py:334: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = None, timeout = None
+
+    def result(self, timeout=None):
+        """Return the result of the call that the future represents.
+    
+        Args:
+            timeout: The number of seconds to wait for the result if the future
+                isn't done. If None, then there is no limit on the wait time.
+    
+        Returns:
+            The result of the call that the future represents.
+    
+        Raises:
+            CancelledError: If the future was cancelled.
+            TimeoutError: If the future didn't finish executing before the given
+                timeout.
+            Exception: If the call raised then that exception will be raised.
+        """
+        try:
+            with self._condition:
+                if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:
+                    raise CancelledError()
+                elif self._state == FINISHED:
+                    return self.__get_result()
+    
+                self._condition.wait(timeout)
+    
+                if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:
+                    raise CancelledError()
+                elif self._state == FINISHED:
+>                   return self.__get_result()
+                           ^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py:456: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = None
+
+    def __get_result(self):
+        if self._exception:
+            try:
+>               raise self._exception
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py:401: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <anyio.from_thread.BlockingPortal object at 0x1072aa510>
+func = <fastapi.applications.FastAPI object at 0x1072a9160>
+args = ({'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function ..._request.<locals>.receive at 0x106f005e0>, <function _TestClientTransport.handle_request.<locals>.send at 0x10733b420>)
+kwargs = {}, future = <Future at 0x10736c9e0 state=finished raised TypeError>
+
+    async def _call_func(
+        self,
+        func: Callable[[Unpack[PosArgsT]], Awaitable[T_Retval] | T_Retval],
+        args: tuple[Unpack[PosArgsT]],
+        kwargs: dict[str, Any],
+        future: Future[T_Retval],
+    ) -> None:
+        def callback(f: Future[T_Retval]) -> None:
+            if f.cancelled():
+                if self._event_loop_thread_id == get_ident():
+                    scope.cancel("the future was cancelled")
+                elif self._event_loop_thread_id is not None:
+                    self.call(scope.cancel, "the future was cancelled")
+    
+        try:
+            retval_or_awaitable = func(*args, **kwargs)
+            if isawaitable(retval_or_awaitable):
+                with CancelScope() as scope:
+                    future.add_done_callback(callback)
+>                   retval = await retval_or_awaitable
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/from_thread.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <fastapi.applications.FastAPI object at 0x1072a9160>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function _TestClientTransport.handle_request.<locals>.send at 0x10733b420>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if self.root_path:
+            scope["root_path"] = self.root_path
+>       await super().__call__(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/applications.py:1135: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <fastapi.applications.FastAPI object at 0x1072a9160>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function _TestClientTransport.handle_request.<locals>.send at 0x10733b420>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        scope["app"] = self
+        if self.middleware_stack is None:
+            self.middleware_stack = self.build_middleware_stack()
+>       await self.middleware_stack(scope, receive, send)
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/applications.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <starlette.middleware.errors.ServerErrorMiddleware object at 0x1072ab4d0>
+scope = {'app': <fastapi.applications.FastAPI object at 0x1072a9160>, 'client': ('testclient', 50000), 'endpoint': <function register at 0x106fd4400>, 'extensions': {'http.response.debug': {}}, ...}
+receive = <function _TestClientTransport.handle_request.<locals>.receive at 0x106f005e0>
+send = <function _TestClientTransport.handle_request.<locals>.send at 0x10733b420>
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+    
+        response_started = False
+    
+        async def _send(message: Message) -> None:
+            nonlocal response_started, send
+    
+            if message["type"] == "http.response.start":
+                response_started = True
+            await send(message)
+    
+        try:
+            await self.app(scope, receive, _send)
+        except Exception as exc:
+            request = Request(scope)
+            if self.debug:
+                # In debug mode, return traceback responses.
+                response = self.debug_response(request, exc)
+            elif self.handler is None:
+                # Use our default 500 error handler.
+                response = self.error_response(request, exc)
+            else:
+                # Use an installed 500 error handler.
+                if is_async_callable(self.handler):
+                    response = await self.handler(request, exc)
+                else:
+                    response = await run_in_threadpool(self.handler, request, exc)
+    
+            if not response_started:
+>               await response(scope, receive, send)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               TypeError: 'dict' object is not callable
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/middleware/errors.py:181: TypeError
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+ERROR    app.main:main.py:133 {"path": "/api/v1/auth/register", "method": "POST", "error": "password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])", "event": "Unhandled exception", "logger": "app.main", "level": "error", "timestamp": "2026-01-30T07:17:19.454531Z", "exception": "Traceback (most recent call last):\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/middleware/errors.py\", line 164, in __call__\n    await self.app(scope, receive, _send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/middleware/cors.py\", line 85, in __call__\n    await self.app(scope, receive, send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/middleware/exceptions.py\", line 63, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py\", line 18, in __call__\n    await self.app(scope, receive, send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/routing.py\", line 716, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/routing.py\", line 736, in app\n    await route.handle(scope, receive, send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/routing.py\", line 290, in handle\n    await self.app(scope, receive, send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py\", line 115, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py\", line 101, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py\", line 355, in app\n    raw_response = await run_endpoint_function(\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/routing.py\", line 243, in run_endpoint_function\n    return await dependant.call(**values)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/api/routes/auth.py\", line 46, in register\n    hashed_password=get_password_hash(user_data.password),\n                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/core/security.py\", line 38, in get_password_hash\n    return pwd_context.hash(password)\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/context.py\", line 2258, in hash\n    return record.hash(secret, **kwds)\n           ~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 779, in hash\n    self.checksum = self._calc_checksum(secret)\n                    ~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py\", line 591, in _calc_checksum\n    self._stub_requires_backend()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 2254, in _stub_requires_backend\n    cls.set_backend()\n    ~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 2156, in set_backend\n    return owner.set_backend(name, dryrun=dryrun)\n           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 2163, in set_backend\n    return cls.set_backend(name, dryrun=dryrun)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 2188, in set_backend\n    cls._set_backend(name, dryrun)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 2311, in _set_backend\n    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 2224, in _set_backend\n    ok = loader(**kwds)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py\", line 626, in _load_backend_mixin\n    return mixin_cls._finalize_backend_mixin(name, dryrun)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py\", line 421, in _finalize_backend_mixin\n    if detect_wrap_bug(IDENT_2A):\n       ~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py\", line 380, in detect_wrap_bug\n    if verify(secret, bug_hash):\n       ~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/utils/handlers.py\", line 792, in verify\n    return consteq(self._calc_checksum(secret), chk)\n                   ~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py\", line 655, in _calc_checksum\n    hash = _bcrypt.hashpw(secret, config)\nValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])"}
+=========================== short test summary info ============================
+FAILED tests/test_api.py::TestAuth::test_register_user - TypeError: 'dict' ob...
+============================== 1 failed in 8.35s ===============================

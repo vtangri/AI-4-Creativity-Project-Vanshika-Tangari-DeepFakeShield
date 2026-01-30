@@ -1,0 +1,223 @@
+"""
+Report generation and export routes.
+"""
+from uuid import UUID
+from pathlib import Path
+from datetime import datetime
+
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import FileResponse, JSONResponse
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+
+from app.db import get_async_db
+from app.models import User, MediaItem, AnalysisJob, Report
+from app.schemas import ReportGenerateRequest, ReportResponse
+from app.api.deps import get_current_user
+
+
+router = APIRouter(prefix="/analysis", tags=["Reports"])
+
+
+@router.post("/{job_id}/report/generate", response_model=ReportResponse)
+async def generate_report(
+    job_id: UUID,
+    request: ReportGenerateRequest = None,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db)
+):
+    """Generate or regenerate a forensic report for an analysis job."""
+    result = await db.execute(
+        select(AnalysisJob)
+        .join(MediaItem)
+        .where(
+            AnalysisJob.id == job_id,
+            MediaItem.user_id == current_user.id
+        )
+    )
+    job = result.scalar_one_or_none()
+    
+    if not job:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Analysis job not found"
+        )
+    
+    if job.status != "DONE":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Analysis must be completed before generating report"
+        )
+    
+    # Check for existing report
+    result = await db.execute(
+        select(Report).where(Report.job_id == job_id)
+    )
+    report = result.scalar_one_or_none()
+    
+    if not report:
+        # Create new report
+        report = Report(
+            job_id=job_id,
+            generated_at=datetime.utcnow()
+        )
+        db.add(report)
+    
+    # TODO: Call LLM service to generate report
+    # For now, generate a placeholder report
+    report.summary = _generate_placeholder_summary(job)
+    report.full_report = _generate_placeholder_full_report(job)
+    report.generated_at = datetime.utcnow()
+    
+    await db.commit()
+    await db.refresh(report)
+    
+    return ReportResponse(
+        job_id=job_id,
+        summary=report.summary,
+        full_report=report.full_report,
+        generated_at=report.generated_at
+    )
+
+
+@router.get("/{job_id}/report", response_model=ReportResponse)
+async def get_report(
+    job_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db)
+):
+    """Get the forensic report for an analysis job."""
+    result = await db.execute(
+        select(Report)
+        .join(AnalysisJob)
+        .join(MediaItem)
+        .where(
+            Report.job_id == job_id,
+            MediaItem.user_id == current_user.id
+        )
+    )
+    report = result.scalar_one_or_none()
+    
+    if not report:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Report not found. Generate one first."
+        )
+    
+    return ReportResponse(
+        job_id=job_id,
+        summary=report.summary,
+        full_report=report.full_report,
+        generated_at=report.generated_at
+    )
+
+
+@router.get("/{job_id}/report.pdf")
+async def get_report_pdf(
+    job_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db)
+):
+    """Download the report as PDF."""
+    result = await db.execute(
+        select(Report)
+        .join(AnalysisJob)
+        .join(MediaItem)
+        .where(
+            Report.job_id == job_id,
+            MediaItem.user_id == current_user.id
+        )
+    )
+    report = result.scalar_one_or_none()
+    
+    if not report:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Report not found"
+        )
+    
+    if not report.pdf_path or not Path(report.pdf_path).exists():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="PDF not generated yet"
+        )
+    
+    return FileResponse(
+        path=report.pdf_path,
+        media_type="application/pdf",
+        filename=f"deepfakeshield_report_{job_id}.pdf"
+    )
+
+
+@router.get("/{job_id}/report.json")
+async def get_report_json(
+    job_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db)
+):
+    """Download the report as JSON."""
+    result = await db.execute(
+        select(Report)
+        .join(AnalysisJob)
+        .join(MediaItem)
+        .where(
+            Report.job_id == job_id,
+            MediaItem.user_id == current_user.id
+        )
+    )
+    report = result.scalar_one_or_none()
+    
+    if not report:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Report not found"
+        )
+    
+    return JSONResponse(
+        content=report.full_report or {},
+        headers={
+            "Content-Disposition": f"attachment; filename=deepfakeshield_report_{job_id}.json"
+        }
+    )
+
+
+def _generate_placeholder_summary(job: AnalysisJob) -> str:
+    """Generate a placeholder summary (replace with LLM call)."""
+    score = job.overall_score or 0
+    label = job.label or "UNKNOWN"
+    
+    if label == "AUTHENTIC":
+        return f"This analysis suggests the media is likely authentic with a confidence score of {(1-score)*100:.1f}%. No significant manipulation indicators were detected across video, audio, and lip-sync analysis."
+    elif label == "LIKELY_FAKE":
+        return f"This analysis indicates the media may be manipulated with a suspicion score of {score*100:.1f}%. Several indicators suggest potential deepfake manipulation. We recommend further verification."
+    else:
+        return f"This analysis detected strong manipulation indicators with a suspicion score of {score*100:.1f}%. The media is likely a deepfake. Please verify the source and consider additional forensic analysis."
+
+
+def _generate_placeholder_full_report(job: AnalysisJob) -> dict:
+    """Generate a placeholder full report."""
+    return {
+        "version": "1.0.0",
+        "job_id": str(job.id),
+        "generated_at": datetime.utcnow().isoformat(),
+        "verdict": {
+            "label": job.label,
+            "overall_score": job.overall_score,
+            "confidence": "high" if job.overall_score and job.overall_score > 0.8 else "medium"
+        },
+        "analysis": {
+            "video": job.results.get("video", {}) if job.results else {},
+            "audio": job.results.get("audio", {}) if job.results else {},
+            "lipsync": job.results.get("lipsync", {}) if job.results else {},
+        },
+        "recommendations": [
+            "Verify the original source of this media",
+            "Check for additional context or metadata",
+            "Consider consulting with forensic experts for high-stakes decisions"
+        ],
+        "limitations": [
+            "AI detection is not 100% accurate",
+            "Results should be considered alongside other evidence",
+            "Detection performance may vary with compression and quality"
+        ]
+    }
