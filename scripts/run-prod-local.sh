@@ -28,7 +28,7 @@ export ENABLE_GPU=false
 mkdir -p backend/storage
 
 echo "📦 Database: SQLite (./prod.db)"
-echo "🚀 Starting Server on http://0.0.0.0:8000"
+echo "🚀 Starting Server on http://0.0.0.0:8001"
 
 cd backend
 
@@ -37,4 +37,4 @@ echo "📊 Running migrations..."
 alembic upgrade head
 
 # Start App
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+uvicorn app.main:app --host 0.0.0.0 --port 8001 --workers 4

@@ -1,0 +1,13 @@
+[2026-01-30 17:21:26,429: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-01-30 17:21:26,438: INFO/MainProcess] mingle: searching for neighbors
+[2026-01-30 17:21:27,449: INFO/MainProcess] mingle: all alone
+[2026-01-30 17:21:27,486: INFO/MainProcess] celery@Suvekxa.local ready.
+[2026-01-30 17:33:26,117: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-01-30 17:33:26,133: INFO/MainProcess] mingle: searching for neighbors
+[2026-01-30 17:33:27,257: WARNING/MainProcess] /Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/celery/app/control.py:56: DuplicateNodenameWarning: Received multiple replies from node name: celery@Suvekxa.local.
+Please make sure you give each node a unique nodename using
+the celery worker `-n` option.
+  warnings.warn(DuplicateNodenameWarning(
+
+[2026-01-30 17:33:27,258: INFO/MainProcess] mingle: all alone
+[2026-01-30 17:33:27,336: INFO/MainProcess] celery@Suvekxa.local ready.

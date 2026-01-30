@@ -1,0 +1,42 @@
+🛡️ Starting DeepFakeShield AI (Local Live Mode)...
+📦 Database: SQLite (./prod.db)
+🚀 Starting Server on http://0.0.0.0:8001
+📊 Running migrations...
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+DEBUG: settings.DATABASE_URL=sqlite:///./prod.db
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started parent process [16596]
+INFO:     Started server process [16599]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [16600]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [16598]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [16601]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: settings.DATABASE_URL=sqlite:///./prod.db
+INFO:     127.0.0.1:51975 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /css/styles.css HTTP/1.1" 404 Not Found
+DEBUG: settings.DATABASE_URL=sqlite:///./prod.db
+INFO:     127.0.0.1:51977 - "GET /js/app.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52031 - "GET /js/app.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52121 - "GET /js/app.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52119 - "GET /css/styles.css HTTP/1.1" 404 Not Found
+ild process [16382]
+INFO:     Waiting for application shutdown.
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [16383]
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [16384]
+INFO:     Application shutdown complete.
+INFO:     Finished server process [16382]
+INFO:     Waiting for child process [16383]
+INFO:     Waiting for child process [16384]
+INFO:     Stopping parent process [16379]

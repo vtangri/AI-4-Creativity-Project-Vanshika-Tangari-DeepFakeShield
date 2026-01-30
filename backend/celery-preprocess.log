@@ -1,0 +1,8 @@
+[2026-01-30 17:21:26,438: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-01-30 17:21:26,441: INFO/MainProcess] mingle: searching for neighbors
+[2026-01-30 17:21:27,457: INFO/MainProcess] mingle: all alone
+[2026-01-30 17:21:27,491: INFO/MainProcess] celery@Suvekxa.local ready.
+[2026-01-30 17:33:15,378: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-01-30 17:33:15,434: INFO/MainProcess] mingle: searching for neighbors
+[2026-01-30 17:33:16,516: INFO/MainProcess] mingle: all alone
+[2026-01-30 17:33:16,803: INFO/MainProcess] celery@Suvekxa.local ready.
