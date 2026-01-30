@@ -45,8 +45,13 @@ async def simulate_analysis_pipeline(job_id: UUID):
         job.completed_at = datetime.utcnow()
         
         # Generate realistic mock results
-        is_fake = random.random() < 0.35  # 35% chance of fake
-        score = random.uniform(0.72, 0.92) if is_fake else random.uniform(0.08, 0.28)
+        # DEMO MODE: Check filename for keywords to force detection
+        filename = job.media_item.original_filename.lower() if job.media_item else ""
+        fake_keywords = ["fake", "deep", "manipulated", "synthetic", "ai", "gen", "test", "demo"]
+        is_known_fake = any(k in filename for k in fake_keywords)
+        
+        is_fake = is_known_fake or (random.random() < 0.35)  # Force fake if keyword match, else 35% chance
+        score = random.uniform(0.78, 0.96) if is_fake else random.uniform(0.04, 0.22)
         label = "LIKELY_FAKE" if is_fake else "AUTHENTIC"
         
         # Modality scores with slight variation
@@ -153,14 +158,67 @@ async def simulate_analysis_pipeline(job_id: UUID):
                 "audio_channels": 2,
                 "file_hash": f"sha256:{random.randbytes(16).hex()}",
                 "analyzed_at": datetime.utcnow().isoformat()
+            },
+            # 1. Media Quality Assessment
+            "media_quality": {
+                "overall_quality_score": round(random.uniform(75, 98), 1) if not ("blur" in filename or "noise" in filename) else round(random.uniform(30, 60), 1),
+                "blur_detection": {
+                    "is_blurry": "blur" in filename,
+                    "blur_score": round(random.uniform(0.1, 0.4), 2) if "blur" not in filename else round(random.uniform(0.6, 0.9), 2)
+                },
+                "noise_level": {
+                    "is_noisy": "noise" in filename,
+                    "snr_db": round(random.uniform(25, 40), 1) if "noise" not in filename else round(random.uniform(10, 18), 1)
+                },
+                "compression_analysis": {
+                    "double_compression_detected": random.random() < 0.2,
+                    "jpeg_quality_estimate": random.randint(85, 98)
+                }
+            },
+            # 2. Frequency Domain Forensics
+            "frequency_analysis": {
+                "gan_fingerprint_detected": is_fake and random.random() > 0.3,
+                "spectrum_consistency": "ABNORMAL" if is_fake else "NORMAL",
+                "fft_anomalies": {
+                    "high_freq_artifacts": is_fake,
+                    "checkerboard_patterns": is_fake and random.random() > 0.5
+                }
+            },
+            # 3. Linguistic Analysis (if audio/transcript exists)
+            "linguistic_analysis": {
+                "fluency_score": round(random.uniform(0.8, 0.98), 2),
+                "suspicious_patterns": {
+                    "templated_speech": "template" in filename,
+                    "unnatural_repetition": "repeat" in filename,
+                    "sentiment_inconsistency": is_fake and random.random() > 0.6
+                },
+                "generated_text_probability": 0.88 if is_fake else 0.12
+            },
+            # 4. Container & Metadata Forensics
+            "container_analysis": {
+                "metadata_consistency": "CONSISTENT" if not is_fake else "SUSPICIOUS",
+                "tool_fingerprints": ["Adobe Premiere", "ffmpeg"] if is_fake else ["Camera Original"],
+                "modification_date_mismatch": is_fake and random.random() > 0.4
             }
         }
         
         db.commit()
         
         # Create Report record
-        from app.models import Report
+        from app.models import Report, Segment
         
+        # Create Segment records
+        for seg_data in segments:
+            segment = Segment(
+                job_id=job_id,
+                start_ms=seg_data["start_ms"],
+                end_ms=seg_data["end_ms"],
+                segment_type=seg_data["segment_type"],
+                score=seg_data["score"],
+                reason=seg_data["reason"]
+            )
+            db.add(segment)
+            
         if label == "AUTHENTIC":
             summary = f"✓ This media appears AUTHENTIC with {(1-score)*100:.0f}% confidence. No significant manipulation indicators detected."
         else:

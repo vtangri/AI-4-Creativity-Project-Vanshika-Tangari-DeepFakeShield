@@ -115,15 +115,12 @@ async def api_info():
 # Mount static files for frontend
 frontend_path = Path(__file__).parent.parent.parent / "frontend"
 if frontend_path.exists():
-    app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
-    
+    # Mount at / to serve assets and index.html (via html=True)
+    app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="frontend")
+else:
     @app.get("/")
-    async def serve_frontend():
-        """Serve the frontend index.html."""
-        index_path = frontend_path / "index.html"
-        if index_path.exists():
-            return FileResponse(str(index_path))
-        return {"message": "Frontend not found. Access API at /docs"}
+    async def root_fallback():
+        return {"message": "Frontend path not found. Access API at /docs"}
 
 
 # Global exception handler

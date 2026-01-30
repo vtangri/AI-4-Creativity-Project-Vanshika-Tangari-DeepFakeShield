@@ -406,38 +406,40 @@
             </div>
           </div>
 
-          <div class="verdict-card" id="verdictCard">
-            <div class="verdict-icon authentic">✓</div>
-            <div class="verdict-content">
-              <h3 class="verdict-label">LIKELY AUTHENTIC</h3>
-              <p class="verdict-description">
-                No significant manipulation indicators detected
-              </p>
-            </div>
-            <div class="verdict-score">
-              <div class="score-circle">
-                <svg viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="45" class="score-bg" />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="45"
-                    class="score-fill"
-                    id="scoreCircle"
-                  />
-                </svg>
-                <span class="score-value" id="scoreValue">15%</span>
+          <div class="results-summary-wrapper">
+            <div class="verdict-card" id="verdictCard">
+              <div class="verdict-icon authentic">✓</div>
+              <div class="verdict-content">
+                <h3 class="verdict-label">LIKELY AUTHENTIC</h3>
+                <p class="verdict-description">
+                  No significant manipulation indicators detected
+                </p>
               </div>
-              <span class="score-label">Suspicion Score</span>
+              <div class="verdict-score">
+                <div class="score-circle">
+                  <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" class="score-bg" />
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      class="score-fill"
+                      id="scoreCircle"
+                    />
+                  </svg>
+                  <span class="score-value" id="scoreValue">15%</span>
+                </div>
+                <span class="score-label">Suspicion Score</span>
+              </div>
             </div>
-          </div>
 
-          <!-- Media Preview -->
-          <div class="media-preview-section" id="mediaPreviewSection" style="display: none;">
-            <h3>📹 Analyzed Media</h3>
-            <div class="media-preview-container">
-              <video id="mediaPreviewVideo" controls style="display: none;"></video>
-              <img id="mediaPreviewImage" alt="Uploaded media" style="display: none;" />
+            <!-- Media Preview -->
+            <div class="media-preview-section" id="mediaPreviewSection" style="display: none;">
+              <h3>📹 Analyzed Media</h3>
+              <div class="media-preview-container">
+                <video id="mediaPreviewVideo" controls style="display: none;"></video>
+                <img id="mediaPreviewImage" alt="Uploaded media" style="display: none;" />
+              </div>
             </div>
           </div>
 
@@ -487,6 +489,14 @@
                 <div class="stat-row"><span>MFCC Anomaly</span><span id="mfccScore">--</span></div>
                 <div class="stat-row"><span>Naturalness</span><span id="naturalness">--</span></div>
                 <div class="stat-row"><span>Formant</span><span id="formantStatus">--</span></div>
+                
+                <!-- Linguistic Analysis -->
+                <div class="stat-row full-row" style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <span style="grid-column: span 2; color: var(--text-secondary); font-size: 0.85em;">Linguistic Forensics</span>
+                </div>
+                <div class="stat-row"><span>AI Text Prob</span><span id="aiTextProb">--</span></div>
+                <div class="stat-row"><span>Templated</span><span id="templatedSpeech">--</span></div>
+                <div class="stat-row"><span>Repetition</span><span id="repetitionStatus">--</span></div>
               </div>
             </div>
 
@@ -515,56 +525,75 @@
             </div>
           </div>
 
-          <!-- Artifacts Detection Panel -->
-          <div class="artifacts-panel glass-card" id="artifactsPanel">
-            <h3>🔍 Artifact Detection</h3>
-            <div class="artifacts-grid">
-              <div class="artifact-item" id="artifactBoundary">
-                <span class="artifact-indicator safe">✓</span>
-                <span>Boundary Artifacts</span>
+          <!-- Media Quality & Artifacts Grid -->
+          <div class="forensics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+              
+              <!-- Media Quality Card -->
+              <div class="glass-card feature-card" id="qualityCard">
+                  <div class="modality-header">
+                      <span class="modality-icon">🛡️</span>
+                      <h4>Media Quality</h4>
+                      <span class="confidence-badge" id="qualityScore">--</span>
+                  </div>
+                  <div class="detail-stats">
+                      <div class="stat-row"><span>Blur Detected</span><span id="blurStatus">--</span></div>
+                      <div class="stat-row"><span>Noise Level</span><span id="noiseLevel">--</span></div>
+                      <div class="stat-row"><span>Compression</span><span id="compressionStatus">--</span></div>
+                      <div class="stat-row"><span>Integrity</span><span id="integrityStatus">--</span></div>
+                  </div>
               </div>
-              <div class="artifact-item" id="artifactTemporal">
-                <span class="artifact-indicator safe">✓</span>
-                <span>Temporal Consistency</span>
+
+              <!-- Artifacts Detection Panel -->
+              <div class="artifacts-panel glass-card" id="artifactsPanel">
+                <h3>🔍 Artifact & Frequency Analysis</h3>
+                <div class="artifacts-grid">
+                  <div class="artifact-item" id="artifactBoundary">
+                    <span class="artifact-indicator safe">✓</span>
+                    <span>Boundary Artifacts</span>
+                  </div>
+                  <div class="artifact-item" id="artifactTemporal">
+                    <span class="artifact-indicator safe">✓</span>
+                    <span>Temporal Consistency</span>
+                  </div>
+                  <div class="artifact-item" id="artifactGan">
+                    <span class="artifact-indicator safe">✓</span>
+                    <span>GAN Fingersteps</span>
+                  </div>
+                  <div class="artifact-item" id="artifactSpectrum">
+                    <span class="artifact-indicator safe">✓</span>
+                    <span>Spectrum Normal</span>
+                  </div>
+                </div>
               </div>
-              <div class="artifact-item" id="artifactColor">
-                <span class="artifact-indicator safe">✓</span>
-                <span>Color Histogram</span>
-              </div>
-              <div class="artifact-item" id="artifactCompression">
-                <span class="artifact-indicator safe">✓</span>
-                <span>Compression</span>
-              </div>
-            </div>
           </div>
 
           <!-- Technical Summary -->
           <div class="technical-summary glass-card" id="technicalSummary">
-            <h3>⚙️ Technical Summary</h3>
+            <h3>⚙️ Technical & Container Forensics</h3>
             <div class="tech-grid">
               <div class="tech-item">
                 <span class="tech-label">Models Used</span>
                 <span class="tech-value" id="modelsUsed">--</span>
               </div>
               <div class="tech-item">
-                <span class="tech-label">Inference Time</span>
-                <span class="tech-value" id="inferenceTime">--</span>
+                <span class="tech-label">Container</span>
+                <span class="tech-value" id="containerStatus">--</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Tool Fingerprints</span>
+                <span class="tech-value" id="toolFingerprints">--</span>
               </div>
               <div class="tech-item">
                 <span class="tech-label">Resolution</span>
                 <span class="tech-value" id="mediaResolution">--</span>
               </div>
               <div class="tech-item">
-                <span class="tech-label">Duration</span>
-                <span class="tech-value" id="mediaDuration">--</span>
-              </div>
-              <div class="tech-item">
-                <span class="tech-label">FPS</span>
-                <span class="tech-value" id="mediaFps">--</span>
-              </div>
-              <div class="tech-item">
                 <span class="tech-label">Codec</span>
                 <span class="tech-value" id="mediaCodec">--</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Modification Date</span>
+                <span class="tech-value" id="dateMismatch">--</span>
               </div>
             </div>
           </div>

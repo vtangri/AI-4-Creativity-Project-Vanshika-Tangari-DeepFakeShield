@@ -144,10 +144,40 @@ async def get_report_pdf(
     report = result.scalar_one_or_none()
     
     if not report:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Report not found"
+        # Check if job exists and is complete, then create report
+        result = await db.execute(
+            select(AnalysisJob)
+            .options(selectinload(AnalysisJob.media_item))
+            .join(MediaItem)
+            .where(
+                AnalysisJob.id == job_id,
+                MediaItem.user_id == current_user.id
+            )
         )
+        job = result.scalar_one_or_none()
+
+        if not job:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Analysis job not found"
+            )
+        
+        if job.status != "DONE":
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Analysis must be completed before generating report"
+            )
+
+        # Create new report
+        report = Report(
+            job_id=job_id,
+            generated_at=datetime.utcnow(),
+            summary=_generate_placeholder_summary(job),
+            full_report=_generate_placeholder_full_report(job)
+        )
+        db.add(report)
+        await db.commit()
+        await db.refresh(report)
     
     # Generate PDF if not exists
     if not report.pdf_path or not Path(report.pdf_path).exists():
@@ -163,10 +193,7 @@ async def get_report_pdf(
             job_id=str(job_id),
             overall_score=job.overall_score or 0.0,
             label=job.label or "UNKNOWN",
-            video_score=job.results.get("video", {}).get("score", 0.0) if job.results else 0.0,
-            audio_score=job.results.get("audio", {}).get("score", 0.0) if job.results else 0.0,
-            lipsync_score=job.results.get("lipsync", {}).get("score", 0.0) if job.results else 0.0,
-            segments=segments,
+            results=job.results or {},
             summary_text=report.summary,
             media_type=job.media_item.media_type if job and job.media_item else "video"
         )

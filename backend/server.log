@@ -1,0 +1,439 @@
+INFO:     Will watch for changes in these directories: ['/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [83826] using WatchFiles
+INFO:     Started server process [83925]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: settings.DATABASE_URL=sqlite:///./prod.db
+INFO:     127.0.0.1:52862 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52862 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52876 - "OPTIONS /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52876 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52977 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52981 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52992 - "OPTIONS /api/v1/reports/cb57d904-5990-4885-956e-c247aece5e8c/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52992 - "GET /api/v1/reports/cb57d904-5990-4885-956e-c247aece5e8c/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53002 - "GET /api/v1/reports/cb57d904-5990-4885-956e-c247aece5e8c/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53024 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53060 - "OPTIONS /api/v1/media/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53060 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53060 - "OPTIONS /api/v1/analysis/start HTTP/1.1" 200 OK
+DEBUG: Looking for media_id=09125770-42d5-429d-8e32-a034f04d594c, user_id=55bd3277-6c87-4367-9548-bd267e960f82
+DEBUG: Found media item belongs to user_id=b34554b7-b515-4405-ab5c-5006f552d696
+INFO:     127.0.0.1:53062 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53064 - "OPTIONS /api/v1/analysis/f51d5461-0d1a-4787-92a2-9ab237574a24/status HTTP/1.1" 200 OK
+DEBUG: Found job id=f51d5461-0d1a-4787-92a2-9ab237574a24, stage=DONE, status=DONE
+INFO:     127.0.0.1:53064 - "GET /api/v1/analysis/f51d5461-0d1a-4787-92a2-9ab237574a24/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53064 - "OPTIONS /api/v1/analysis/f51d5461-0d1a-4787-92a2-9ab237574a24/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53066 - "GET /api/v1/analysis/f51d5461-0d1a-4787-92a2-9ab237574a24/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53070 - "OPTIONS /api/v1/reports/f51d5461-0d1a-4787-92a2-9ab237574a24/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53070 - "GET /api/v1/reports/f51d5461-0d1a-4787-92a2-9ab237574a24/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53088 - "GET /api/v1/reports/f51d5461-0d1a-4787-92a2-9ab237574a24/report.pdf HTTP/1.1" 404 Not Found
+WARNING:  WatchFiles detected changes in 'app/api/routes/reports.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [83925]
+INFO:     Started server process [85093]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: settings.DATABASE_URL=sqlite:///./prod.db
+INFO:     127.0.0.1:53132 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53132 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53151 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+DEBUG: Looking for media_id=9bea62d5-1460-48ff-9ebe-638a872eea1e, user_id=55bd3277-6c87-4367-9548-bd267e960f82
+DEBUG: Found media item belongs to user_id=55bd3277-6c87-4367-9548-bd267e960f82
+INFO:     127.0.0.1:53151 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53151 - "OPTIONS /api/v1/analysis/adea824f-5115-4cfa-9000-6274cd78b08b/status HTTP/1.1" 200 OK
+DEBUG: Found job id=adea824f-5115-4cfa-9000-6274cd78b08b, stage=DONE, status=DONE
+INFO:     127.0.0.1:53151 - "GET /api/v1/analysis/adea824f-5115-4cfa-9000-6274cd78b08b/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53151 - "OPTIONS /api/v1/analysis/adea824f-5115-4cfa-9000-6274cd78b08b/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53154 - "GET /api/v1/analysis/adea824f-5115-4cfa-9000-6274cd78b08b/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53166 - "OPTIONS /api/v1/reports/adea824f-5115-4cfa-9000-6274cd78b08b/report.pdf HTTP/1.1" 200 OK
+{"path": "/api/v1/reports/adea824f-5115-4cfa-9000-6274cd78b08b/report.pdf", "method": "GET", "error": "'black'", "event": "Unhandled exception", "logger": "app.main", "level": "error", "timestamp": "2026-01-30T21:43:21.505592Z", "exception": "Traceback (most recent call last):\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py\", line 164, in __call__\n    await self.app(scope, receive, _send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py\", line 93, in __call__\n    await self.simple_response(scope, receive, send, request_headers=headers)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py\", line 144, in simple_response\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py\", line 63, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py\", line 18, in __call__\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 716, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 736, in app\n    await route.handle(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 290, in handle\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 115, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 101, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 355, in app\n    raw_response = await run_endpoint_function(\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 243, in run_endpoint_function\n    return await dependant.call(**values)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/api/routes/reports.py\", line 192, in get_report_pdf\n    pdf_path = generate_pdf_report(\n        job_id=str(job_id),\n    ...<4 lines>...\n        media_type=job.media_item.media_type if job and job.media_item else \"video\"\n    )\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 520, in generate_pdf_report\n    return pdf_generator.generate_report(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        job_id=job_id,\n        ^^^^^^^^^^^^^^\n    ...<4 lines>...\n        media_type=media_type\n        ^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 159, in generate_report\n    story.extend(self._build_modality_section(\n                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        video.get(\"score\", 0.0),\n        ^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n        results\n        ^^^^^^^\n    ))\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 374, in _build_modality_section\n    elements.extend(self._build_linguistic_analysis_section(results['linguistic_analysis']))\n                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 397, in _build_linguistic_analysis_section\n    ('TEXTCOLOR', (1,1), (1,1), COLORS['error'] if \"DETECTED\" in data[1][1] or \"DETECTED\" in data[2][1] else COLORS['black'])\n                                                                                                             ~~~~~~^^^^^^^^^\nKeyError: 'black'"}
+INFO:     127.0.0.1:53166 - "GET /api/v1/reports/adea824f-5115-4cfa-9000-6274cd78b08b/report.pdf HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 416, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1135, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 115, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 101, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 355, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 243, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/api/routes/reports.py", line 192, in get_report_pdf
+    pdf_path = generate_pdf_report(
+        job_id=str(job_id),
+    ...<4 lines>...
+        media_type=job.media_item.media_type if job and job.media_item else "video"
+    )
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 520, in generate_pdf_report
+    return pdf_generator.generate_report(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        job_id=job_id,
+        ^^^^^^^^^^^^^^
+    ...<4 lines>...
+        media_type=media_type
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 159, in generate_report
+    story.extend(self._build_modality_section(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        video.get("score", 0.0),
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        results
+        ^^^^^^^
+    ))
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 374, in _build_modality_section
+    elements.extend(self._build_linguistic_analysis_section(results['linguistic_analysis']))
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 397, in _build_linguistic_analysis_section
+    ('TEXTCOLOR', (1,1), (1,1), COLORS['error'] if "DETECTED" in data[1][1] or "DETECTED" in data[2][1] else COLORS['black'])
+                                                                                                             ~~~~~~^^^^^^^^^
+KeyError: 'black'
+{"path": "/api/v1/reports/adea824f-5115-4cfa-9000-6274cd78b08b/report.pdf", "method": "GET", "error": "'black'", "event": "Unhandled exception", "logger": "app.main", "level": "error", "timestamp": "2026-01-30T21:43:37.874099Z", "exception": "Traceback (most recent call last):\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py\", line 164, in __call__\n    await self.app(scope, receive, _send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py\", line 93, in __call__\n    await self.simple_response(scope, receive, send, request_headers=headers)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py\", line 144, in simple_response\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py\", line 63, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py\", line 18, in __call__\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 716, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 736, in app\n    await route.handle(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 290, in handle\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 115, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 101, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 355, in app\n    raw_response = await run_endpoint_function(\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 243, in run_endpoint_function\n    return await dependant.call(**values)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/api/routes/reports.py\", line 192, in get_report_pdf\n    pdf_path = generate_pdf_report(\n        job_id=str(job_id),\n    ...<4 lines>...\n        media_type=job.media_item.media_type if job and job.media_item else \"video\"\n    )\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 520, in generate_pdf_report\n    return pdf_generator.generate_report(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        job_id=job_id,\n        ^^^^^^^^^^^^^^\n    ...<4 lines>...\n        media_type=media_type\n        ^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 159, in generate_report\n    story.extend(self._build_modality_section(\n                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        video.get(\"score\", 0.0),\n        ^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n        results\n        ^^^^^^^\n    ))\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 374, in _build_modality_section\n    elements.extend(self._build_linguistic_analysis_section(results['linguistic_analysis']))\n                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 397, in _build_linguistic_analysis_section\n    ('TEXTCOLOR', (1,1), (1,1), COLORS['error'] if \"DETECTED\" in data[1][1] or \"DETECTED\" in data[2][1] else COLORS['black'])\n                                                                                                             ~~~~~~^^^^^^^^^\nKeyError: 'black'"}
+INFO:     127.0.0.1:53170 - "GET /api/v1/reports/adea824f-5115-4cfa-9000-6274cd78b08b/report.pdf HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 416, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1135, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 115, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 101, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 355, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 243, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/api/routes/reports.py", line 192, in get_report_pdf
+    pdf_path = generate_pdf_report(
+        job_id=str(job_id),
+    ...<4 lines>...
+        media_type=job.media_item.media_type if job and job.media_item else "video"
+    )
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 520, in generate_pdf_report
+    return pdf_generator.generate_report(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        job_id=job_id,
+        ^^^^^^^^^^^^^^
+    ...<4 lines>...
+        media_type=media_type
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 159, in generate_report
+    story.extend(self._build_modality_section(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        video.get("score", 0.0),
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        results
+        ^^^^^^^
+    ))
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 374, in _build_modality_section
+    elements.extend(self._build_linguistic_analysis_section(results['linguistic_analysis']))
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 397, in _build_linguistic_analysis_section
+    ('TEXTCOLOR', (1,1), (1,1), COLORS['error'] if "DETECTED" in data[1][1] or "DETECTED" in data[2][1] else COLORS['black'])
+                                                                                                             ~~~~~~^^^^^^^^^
+KeyError: 'black'
+INFO:     127.0.0.1:53180 - "GET /api/v1/reports/adea824f-5115-4cfa-9000-6274cd78b08b/report.pdf HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:53180 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53191 - "OPTIONS /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53191 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53204 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53225 - "POST /api/v1/media/upload HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:53232 - "GET /api/v1/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:53232 - "OPTIONS /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53232 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53232 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53237 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+DEBUG: Looking for media_id=3eb77399-094b-4747-af39-4baa61a4134a, user_id=82be1376-b55b-4db4-9bdb-940ca9ecd484
+DEBUG: Found media item belongs to user_id=82be1376-b55b-4db4-9bdb-940ca9ecd484
+INFO:     127.0.0.1:53237 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53237 - "OPTIONS /api/v1/analysis/44a2f4ec-838e-4cd4-bb2a-3fde608f4308/status HTTP/1.1" 200 OK
+DEBUG: Found job id=44a2f4ec-838e-4cd4-bb2a-3fde608f4308, stage=DONE, status=DONE
+INFO:     127.0.0.1:53237 - "GET /api/v1/analysis/44a2f4ec-838e-4cd4-bb2a-3fde608f4308/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53237 - "OPTIONS /api/v1/analysis/44a2f4ec-838e-4cd4-bb2a-3fde608f4308/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53239 - "GET /api/v1/analysis/44a2f4ec-838e-4cd4-bb2a-3fde608f4308/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53242 - "OPTIONS /api/v1/reports/44a2f4ec-838e-4cd4-bb2a-3fde608f4308/report.pdf HTTP/1.1" 200 OK
+{"path": "/api/v1/reports/44a2f4ec-838e-4cd4-bb2a-3fde608f4308/report.pdf", "method": "GET", "error": "'black'", "event": "Unhandled exception", "logger": "app.main", "level": "error", "timestamp": "2026-01-30T21:46:44.523152Z", "exception": "Traceback (most recent call last):\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py\", line 164, in __call__\n    await self.app(scope, receive, _send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py\", line 93, in __call__\n    await self.simple_response(scope, receive, send, request_headers=headers)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py\", line 144, in simple_response\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py\", line 63, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py\", line 18, in __call__\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 716, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 736, in app\n    await route.handle(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py\", line 290, in handle\n    await self.app(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 115, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 101, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 355, in app\n    raw_response = await run_endpoint_function(\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py\", line 243, in run_endpoint_function\n    return await dependant.call(**values)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/api/routes/reports.py\", line 192, in get_report_pdf\n    pdf_path = generate_pdf_report(\n        job_id=str(job_id),\n    ...<4 lines>...\n        media_type=job.media_item.media_type if job and job.media_item else \"video\"\n    )\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 520, in generate_pdf_report\n    return pdf_generator.generate_report(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        job_id=job_id,\n        ^^^^^^^^^^^^^^\n    ...<4 lines>...\n        media_type=media_type\n        ^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 159, in generate_report\n    story.extend(self._build_modality_section(\n                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        video.get(\"score\", 0.0),\n        ^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n        results\n        ^^^^^^^\n    ))\n    ^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 374, in _build_modality_section\n    elements.extend(self._build_linguistic_analysis_section(results['linguistic_analysis']))\n                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py\", line 397, in _build_linguistic_analysis_section\n    ('TEXTCOLOR', (1,1), (1,1), COLORS['error'] if \"DETECTED\" in data[1][1] or \"DETECTED\" in data[2][1] else COLORS['black'])\n                                                                                                             ~~~~~~^^^^^^^^^\nKeyError: 'black'"}
+INFO:     127.0.0.1:53242 - "GET /api/v1/reports/44a2f4ec-838e-4cd4-bb2a-3fde608f4308/report.pdf HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 416, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1135, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 115, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 101, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 355, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/venv/lib/python3.13/site-packages/fastapi/routing.py", line 243, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/api/routes/reports.py", line 192, in get_report_pdf
+    pdf_path = generate_pdf_report(
+        job_id=str(job_id),
+    ...<4 lines>...
+        media_type=job.media_item.media_type if job and job.media_item else "video"
+    )
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 520, in generate_pdf_report
+    return pdf_generator.generate_report(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        job_id=job_id,
+        ^^^^^^^^^^^^^^
+    ...<4 lines>...
+        media_type=media_type
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 159, in generate_report
+    story.extend(self._build_modality_section(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        video.get("score", 0.0),
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        results
+        ^^^^^^^
+    ))
+    ^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 374, in _build_modality_section
+    elements.extend(self._build_linguistic_analysis_section(results['linguistic_analysis']))
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santosh/Documents/AI Lab-Krishna/vanshika/DeepFake Sheild AI/deepfakeshield/backend/app/services/pdf_service.py", line 397, in _build_linguistic_analysis_section
+    ('TEXTCOLOR', (1,1), (1,1), COLORS['error'] if "DETECTED" in data[1][1] or "DETECTED" in data[2][1] else COLORS['black'])
+                                                                                                             ~~~~~~^^^^^^^^^
+KeyError: 'black'
+WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [85093]
+WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
+INFO:     Started server process [85302]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: settings.DATABASE_URL=sqlite:///./prod.db
+INFO:     127.0.0.1:53264 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53297 - "OPTIONS /api/v1/media/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53297 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53297 - "OPTIONS /api/v1/analysis/start HTTP/1.1" 200 OK
+DEBUG: Looking for media_id=09125770-42d5-429d-8e32-a034f04d594c, user_id=82be1376-b55b-4db4-9bdb-940ca9ecd484
+DEBUG: Found media item belongs to user_id=b34554b7-b515-4405-ab5c-5006f552d696
+INFO:     127.0.0.1:53299 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53299 - "OPTIONS /api/v1/analysis/13dd5530-0f77-49f4-bcf1-34a546c13b50/status HTTP/1.1" 200 OK
+DEBUG: Found job id=13dd5530-0f77-49f4-bcf1-34a546c13b50, stage=DONE, status=DONE
+INFO:     127.0.0.1:53297 - "GET /api/v1/analysis/13dd5530-0f77-49f4-bcf1-34a546c13b50/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53297 - "OPTIONS /api/v1/analysis/13dd5530-0f77-49f4-bcf1-34a546c13b50/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53299 - "GET /api/v1/analysis/13dd5530-0f77-49f4-bcf1-34a546c13b50/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53313 - "OPTIONS /api/v1/reports/13dd5530-0f77-49f4-bcf1-34a546c13b50/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53313 - "GET /api/v1/reports/13dd5530-0f77-49f4-bcf1-34a546c13b50/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53330 - "GET /api/v1/reports/13dd5530-0f77-49f4-bcf1-34a546c13b50/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53345 - "GET /api/v1/reports/13dd5530-0f77-49f4-bcf1-34a546c13b50/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53356 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53356 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53414 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+DEBUG: Looking for media_id=09125770-42d5-429d-8e32-a034f04d594c, user_id=82be1376-b55b-4db4-9bdb-940ca9ecd484
+DEBUG: Found media item belongs to user_id=b34554b7-b515-4405-ab5c-5006f552d696
+INFO:     127.0.0.1:53414 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53414 - "OPTIONS /api/v1/analysis/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/status HTTP/1.1" 200 OK
+DEBUG: Found job id=b12b7aa1-cbcd-4952-82b2-59eb2270ce7b, stage=DONE, status=DONE
+INFO:     127.0.0.1:53414 - "GET /api/v1/analysis/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53414 - "OPTIONS /api/v1/analysis/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53417 - "GET /api/v1/analysis/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53424 - "OPTIONS /api/v1/reports/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53424 - "GET /api/v1/reports/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53445 - "GET /api/v1/reports/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53461 - "GET /api/v1/reports/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53492 - "GET /api/v1/reports/b12b7aa1-cbcd-4952-82b2-59eb2270ce7b/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53499 - "OPTIONS /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53499 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53512 - "OPTIONS /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53512 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53541 - "GET /api/v1/reports/52fe031d/report.pdf HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:53572 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53572 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53620 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53620 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53622 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53622 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53622 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53624 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53624 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53624 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53624 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53624 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53624 - "GET /api/v1/reports/52fe031d-f7fc-45bc-a5e5-bc42e1843c94/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53744 - "OPTIONS /api/v1/media/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53744 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53744 - "OPTIONS /api/v1/analysis/start HTTP/1.1" 200 OK
+DEBUG: Looking for media_id=95cf1fe2-9dc6-4d51-9786-656661b46ef4, user_id=82be1376-b55b-4db4-9bdb-940ca9ecd484
+DEBUG: Found media item belongs to user_id=8999da7d-bb0b-4e5a-be05-175c0f042efd
+INFO:     127.0.0.1:53744 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53744 - "OPTIONS /api/v1/analysis/01e7bd92-1345-41a1-8311-45b9b00cf7cb/status HTTP/1.1" 200 OK
+DEBUG: Found job id=01e7bd92-1345-41a1-8311-45b9b00cf7cb, stage=DONE, status=DONE
+INFO:     127.0.0.1:53746 - "GET /api/v1/analysis/01e7bd92-1345-41a1-8311-45b9b00cf7cb/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53746 - "OPTIONS /api/v1/analysis/01e7bd92-1345-41a1-8311-45b9b00cf7cb/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53744 - "GET /api/v1/analysis/01e7bd92-1345-41a1-8311-45b9b00cf7cb/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53750 - "OPTIONS /api/v1/reports/01e7bd92-1345-41a1-8311-45b9b00cf7cb/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53750 - "GET /api/v1/reports/01e7bd92-1345-41a1-8311-45b9b00cf7cb/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53756 - "GET /api/v1/reports/01e7bd92-1345-41a1-8311-45b9b00cf7cb/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53760 - "GET /api/v1/reports/01e7bd92-1345-41a1-8311-45b9b00cf7cb/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53786 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53786 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53793 - "OPTIONS /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53793 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53799 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53829 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53844 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+DEBUG: Looking for media_id=09125770-42d5-429d-8e32-a034f04d594c, user_id=82be1376-b55b-4db4-9bdb-940ca9ecd484
+DEBUG: Found media item belongs to user_id=b34554b7-b515-4405-ab5c-5006f552d696
+INFO:     127.0.0.1:53844 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:53844 - "OPTIONS /api/v1/analysis/b4ce00c6-a65f-46ee-b8ad-80856b955344/status HTTP/1.1" 200 OK
+DEBUG: Found job id=b4ce00c6-a65f-46ee-b8ad-80856b955344, stage=DONE, status=DONE
+INFO:     127.0.0.1:53844 - "GET /api/v1/analysis/b4ce00c6-a65f-46ee-b8ad-80856b955344/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53844 - "OPTIONS /api/v1/analysis/b4ce00c6-a65f-46ee-b8ad-80856b955344/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53861 - "GET /api/v1/analysis/b4ce00c6-a65f-46ee-b8ad-80856b955344/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53890 - "OPTIONS /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-80856b955344/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53890 - "GET /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-80856b955344/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53948 - "GET /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-80856b955344/report.pdf HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:53952 - "GET /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-80856b955344/report.pdf HTTP/1.1" 401 Unauthorized

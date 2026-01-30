@@ -684,6 +684,14 @@ function updateModalityScores(data) {
         `${Math.round(audio.voice_identity.naturalness_score * 100)}%` : '--');
     setText('formantStatus', audio.spectral_analysis?.formant_consistency || '--');
     
+    // Linguistic Analysis
+    const ling = results.linguistic_analysis || {};
+    const lingPatterns = ling.suspicious_patterns || {};
+    
+    setText('aiTextProb', ling.generated_text_probability ? `${Math.round(ling.generated_text_probability * 100)}%` : '--');
+    setText('templatedSpeech', lingPatterns.templated_speech ? '⚠️ Yes' : 'No');
+    setText('repetitionStatus', lingPatterns.unnatural_repetition ? '⚠️ Detected' : 'Normal');
+    
     // Audio Description
     const audioDesc = document.getElementById('audioDescription');
     if (audioDesc) {
@@ -734,18 +742,37 @@ function updateModalityScores(data) {
     // Artifacts Detection
     updateArtifact('artifactBoundary', !artifacts.boundary_artifacts);
     updateArtifact('artifactTemporal', !artifacts.temporal_inconsistency);
-    updateArtifact('artifactColor', !artifacts.color_histogram_anomaly);
-    updateArtifact('artifactCompression', !artifacts.compression_artifacts);
     
-    // Technical Summary
+    // New Artifacts
+    const freq = results.frequency_analysis || {};
+    updateArtifact('artifactGan', !freq.gan_fingerprint_detected);
+    updateArtifact('artifactSpectrum', freq.spectrum_consistency !== 'ABNORMAL');
+
+    // Media Quality Card
+    const quality = results.media_quality || {};
+    setText('qualityScore', quality.overall_quality_score ? `${quality.overall_quality_score}/100` : '--');
+    
+    const blur = quality.blur_detection || {};
+    const noise = quality.noise_level || {};
+    const compression = quality.compression_analysis || {};
+    
+    setText('blurStatus', blur.is_blurry ? `Detected (${blur.blur_score})` : 'Clear');
+    setText('noiseLevel', noise.snr_db ? `${noise.snr_db} dB` : '--');
+    setText('compressionStatus', compression.double_compression_detected ? 'Double Compression' : 'Single Pass');
+    setText('integrityStatus', metadata.file_hash ? 'Verified' : '--');
+
+    // Technical Summary & Container Forensics
+    const container = results.container_analysis || {};
+    
     setText('modelsUsed', techSummary.models_used?.length ? 
         techSummary.models_used.length + ' models' : '--');
-    setText('inferenceTime', techSummary.total_inference_time_ms ?
-        `${techSummary.total_inference_time_ms}ms` : '--');
+    
+    setText('containerStatus', container.metadata_consistency || '--');
+    setText('toolFingerprints', container.tool_fingerprints?.join(', ') || 'None detected');
+    
     setText('mediaResolution', metadata.resolution || '--');
-    setText('mediaDuration', metadata.duration_s ? `${metadata.duration_s}s` : '--');
-    setText('mediaFps', metadata.fps || '--');
     setText('mediaCodec', metadata.codec || '--');
+    setText('dateMismatch', container.modification_date_mismatch ? '⚠️ Mismatch' : 'Consistent');
 }
 
 // Helper to safely set text content
@@ -951,12 +978,28 @@ function renderReportsList(reports) {
                     <div class="report-status ${statusClass}" style="${statusStyle}">
                     ${statusText} (${score}%)
                     </div>
-                <button class="btn btn-ghost btn-sm" onclick="showToast('PDF Download feature coming soon', 'info')">
+                <button class="btn btn-ghost btn-sm download-pdf-btn" data-job-id="${r.id}">
                     Download PDF
                 </button>
             </div>
         </div>
     `}).join('');
+    
+    // Attach event listeners to new buttons
+    container.querySelectorAll('.download-pdf-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const jobId = btn.dataset.jobId;
+            try {
+                showToast('Generating PDF...', 'info');
+                await api.downloadPDF(jobId);
+                showToast('Report downloaded!', 'success');
+            } catch (err) {
+                console.error(err);
+                showToast('Download failed: ' + err.message, 'error');
+            }
+        });
+    });
     
     // Refresh tilt effect for new items
     VFX.refresh();
