@@ -140,6 +140,7 @@ class AnalysisResultResponse(BaseModel):
     status: str
     overall_score: Optional[float]
     label: Optional[str]
+    results: Optional[dict] = None  # Contains all detailed forensic data
     segments: List[SegmentResponse] = []
     model_runs: List[ModelRunResponse] = []
     started_at: Optional[datetime]
@@ -199,6 +200,10 @@ class ReportGenerateRequest(BaseModel):
 class ReportResponse(BaseModel):
     """Report response."""
     job_id: UUID
+    id: UUID
+    created_at: datetime
+    overall_score: Optional[float] = 0.0
+    media_type: Optional[str] = "unknown"
     summary: Optional[str]
     full_report: Optional[dict]
     generated_at: Optional[datetime]

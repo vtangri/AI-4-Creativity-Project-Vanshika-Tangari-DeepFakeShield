@@ -42,10 +42,11 @@ def get_media_type(mime_type: str) -> str:
 
 
 async def compute_sha256(file_path: str) -> str:
-    """Compute SHA256 hash of a file."""
+    """Compute SHA256 hash of a file - optimized with large chunks."""
     sha256_hash = hashlib.sha256()
     async with aiofiles.open(file_path, "rb") as f:
-        while chunk := await f.read(8192):
+        # Use 1MB chunks for faster processing
+        while chunk := await f.read(1024 * 1024):
             sha256_hash.update(chunk)
     return sha256_hash.hexdigest()
 
@@ -164,3 +165,21 @@ async def get_media(
         )
     
     return media_item
+
+
+@router.get("/", response_model=list[MediaItemResponse])
+async def list_media(
+    skip: int = 0,
+    limit: int = 100,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db)
+):
+    """List all media items for the current user."""
+    result = await db.execute(
+        select(MediaItem)
+        .where(MediaItem.user_id == current_user.id)
+        .order_by(MediaItem.created_at.desc())
+        .offset(skip)
+        .limit(limit)
+    )
+    return result.scalars().all()

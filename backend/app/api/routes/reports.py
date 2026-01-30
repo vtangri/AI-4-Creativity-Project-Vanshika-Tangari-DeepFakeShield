@@ -9,6 +9,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import FileResponse, JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 
 from app.db import get_async_db
 from app.models import User, MediaItem, AnalysisJob, Report
@@ -16,7 +17,7 @@ from app.schemas import ReportGenerateRequest, ReportResponse
 from app.api.deps import get_current_user
 
 
-router = APIRouter(prefix="/analysis", tags=["Reports"])
+router = APIRouter(prefix="/reports", tags=["Reports"])
 
 
 @router.post("/{job_id}/report/generate", response_model=ReportResponse)
@@ -73,10 +74,14 @@ async def generate_report(
     await db.refresh(report)
     
     return ReportResponse(
+        id=report.id,
         job_id=job_id,
         summary=report.summary,
         full_report=report.full_report,
-        generated_at=report.generated_at
+        generated_at=report.generated_at,
+        created_at=report.created_at,
+        overall_score=job.overall_score,
+        media_type=job.media_item.media_type if hasattr(job, "media_item") and job.media_item else "unknown"
     )
 
 
@@ -89,6 +94,7 @@ async def get_report(
     """Get the forensic report for an analysis job."""
     result = await db.execute(
         select(Report)
+        .options(selectinload(Report.analysis_job).selectinload(AnalysisJob.media_item))
         .join(AnalysisJob)
         .join(MediaItem)
         .where(
@@ -105,10 +111,14 @@ async def get_report(
         )
     
     return ReportResponse(
+        id=report.id,
         job_id=job_id,
         summary=report.summary,
         full_report=report.full_report,
-        generated_at=report.generated_at
+        generated_at=report.generated_at,
+        created_at=report.created_at,
+        overall_score=report.analysis_job.overall_score if report.analysis_job else 0.0,
+        media_type=report.analysis_job.media_item.media_type if report.analysis_job and report.analysis_job.media_item else "unknown"
     )
 
 
@@ -119,8 +129,11 @@ async def get_report_pdf(
     db: AsyncSession = Depends(get_async_db)
 ):
     """Download the report as PDF."""
+    from app.services.pdf_service import generate_pdf_report
+    
     result = await db.execute(
         select(Report)
+        .options(selectinload(Report.analysis_job).selectinload(AnalysisJob.media_item))
         .join(AnalysisJob)
         .join(MediaItem)
         .where(
@@ -136,17 +149,38 @@ async def get_report_pdf(
             detail="Report not found"
         )
     
+    # Generate PDF if not exists
     if not report.pdf_path or not Path(report.pdf_path).exists():
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="PDF not generated yet"
+        job = report.analysis_job
+        
+        # Get segment data from job results
+        segments = []
+        if job and job.results:
+            segments = job.results.get("segments", [])
+        
+        # Generate PDF
+        pdf_path = generate_pdf_report(
+            job_id=str(job_id),
+            overall_score=job.overall_score or 0.0,
+            label=job.label or "UNKNOWN",
+            video_score=job.results.get("video", {}).get("score", 0.0) if job.results else 0.0,
+            audio_score=job.results.get("audio", {}).get("score", 0.0) if job.results else 0.0,
+            lipsync_score=job.results.get("lipsync", {}).get("score", 0.0) if job.results else 0.0,
+            segments=segments,
+            summary_text=report.summary,
+            media_type=job.media_item.media_type if job and job.media_item else "video"
         )
+        
+        # Save PDF path
+        report.pdf_path = pdf_path
+        await db.commit()
     
     return FileResponse(
         path=report.pdf_path,
         media_type="application/pdf",
         filename=f"deepfakeshield_report_{job_id}.pdf"
     )
+
 
 
 @router.get("/{job_id}/report.json")
@@ -179,6 +213,42 @@ async def get_report_json(
             "Content-Disposition": f"attachment; filename=deepfakeshield_report_{job_id}.json"
         }
     )
+
+
+@router.get("/", response_model=list[ReportResponse])
+async def list_reports(
+    skip: int = 0,
+    limit: int = 100,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db)
+):
+    """List all reports for the current user."""
+    result = await db.execute(
+        select(Report)
+        .options(selectinload(Report.analysis_job).selectinload(AnalysisJob.media_item))
+        .join(AnalysisJob)
+        .join(MediaItem)
+        .where(MediaItem.user_id == current_user.id)
+        .order_by(Report.generated_at.desc())
+        .offset(skip)
+        .limit(limit)
+    )
+    reports = result.scalars().all()
+    
+    response = []
+    for r in reports:
+        response.append(ReportResponse(
+            id=r.id,
+            job_id=r.job_id,
+            summary=r.summary,
+            full_report=r.full_report,
+            generated_at=r.generated_at,
+            created_at=r.created_at,
+            overall_score=r.analysis_job.overall_score if r.analysis_job else 0.0,
+            media_type=r.analysis_job.media_item.media_type if r.analysis_job and r.analysis_job.media_item else "unknown"
+        ))
+        
+    return response
 
 
 def _generate_placeholder_summary(job: AnalysisJob) -> str:

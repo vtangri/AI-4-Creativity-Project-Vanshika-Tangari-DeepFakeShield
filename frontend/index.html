@@ -18,7 +18,7 @@
     />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css?v=2.0.0" />
 
     <!-- Favicon -->
     <link
@@ -31,7 +31,6 @@
     <!-- Navigation -->
     <nav class="navbar">
       <div class="nav-brand">
-        <span class="brand-icon">🛡️</span>
         <span class="brand-text"
           >DeepFakeShield<span class="brand-ai">AI</span></span
         >
@@ -42,9 +41,35 @@
         <a href="#" class="nav-link" data-page="reports">Reports</a>
         <a href="#" class="nav-link" data-page="settings">Settings</a>
       </div>
-      <div class="nav-actions">
-        <button class="btn btn-ghost" id="loginBtn">Login</button>
-        <button class="btn btn-primary" id="signupBtn">Get Started</button>
+      <div class="nav-actions" id="navAuthSection">
+        <!-- Auth Buttons (Default) -->
+        <div id="authButtons">
+            <button class="btn btn-ghost" id="loginBtn">Login</button>
+            <button class="btn btn-primary" id="signupBtn">Get Started</button>
+        </div>
+
+        <!-- User Profile (Hidden by default) -->
+        <div class="user-menu" id="userMenu" style="display: none;">
+            <div class="user-profile" id="userProfileBtn">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <span class="user-name" id="userName">John Doe</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="dropdown-menu" id="userDropdown">
+                <div class="dropdown-item" data-action="profile">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Profile
+                </div>
+                <div class="dropdown-item" data-action="settings" onclick="navigateTo('settings')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    Settings
+                </div>
+                <div class="dropdown-item text-error" id="logoutBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Logout
+                </div>
+            </div>
+        </div>
       </div>
     </nav>
 
@@ -56,16 +81,16 @@
           <div class="hero-content">
             <div class="hero-badge">
               <span class="badge-icon">✨</span>
-              <span>AI-Powered Detection</span>
+              <span>AI-Powered Detection Engine v2.0</span>
             </div>
             <h1 class="hero-title">
               Detect <span class="gradient-text">Deepfakes</span> with<br />
-              Military-Grade Precision
+              Precision & Speed
             </h1>
             <p class="hero-description">
-              Advanced multimodal analysis combining video forensics, audio
-              spoof detection, and lip-sync verification. Get detailed evidence
-              timelines and forensic reports.
+              Secure your digital integrity with our advanced multimodal analysis platform. 
+              We combine video forensics, audio spoof detection, and lip-sync verification 
+              to identify AI-generated content in seconds.
             </p>
             <div class="hero-actions">
               <button class="btn btn-primary btn-lg" id="startAnalysisBtn">
@@ -81,45 +106,35 @@
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </button>
-              <button class="btn btn-ghost btn-lg">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" />
-                </svg>
-                <span>Watch Demo</span>
+              <button class="btn btn-ghost btn-lg" onclick="document.getElementById('howItWorks').scrollIntoView({behavior: 'smooth'})">
+                <span>How it Works</span>
               </button>
             </div>
             <div class="hero-stats">
               <div class="stat">
                 <span class="stat-value">99.2%</span>
-                <span class="stat-label">Detection Rate</span>
+                <span class="stat-label">Accuracy</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat">
-                <span class="stat-value">3</span>
+                <span class="stat-value">3+</span>
                 <span class="stat-label">Modalities</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat">
                 <span class="stat-value">&lt;30s</span>
-                <span class="stat-label">Analysis Time</span>
+                <span class="stat-label">Processing</span>
               </div>
             </div>
           </div>
+          <!-- Hero Visual (Interactive Preview) -->
           <div class="hero-visual">
             <div class="analysis-preview">
               <div class="preview-header">
                 <div class="preview-dots">
                   <span></span><span></span><span></span>
                 </div>
-                <span class="preview-title">Analysis Preview</span>
+                <span class="preview-title">Live Analysis Preview</span>
               </div>
               <div class="preview-content">
                 <div class="preview-video">
@@ -132,25 +147,18 @@
                 </div>
                 <div class="preview-metrics">
                   <div class="metric">
-                    <span class="metric-label">Video</span>
+                    <span class="metric-label">Facial Artifacts</span>
                     <div class="metric-bar">
                       <div class="metric-fill" style="width: 15%"></div>
                     </div>
-                    <span class="metric-value safe">15%</span>
+                    <span class="metric-value safe">Low</span>
                   </div>
                   <div class="metric">
-                    <span class="metric-label">Audio</span>
+                    <span class="metric-label">Audio Synth</span>
                     <div class="metric-bar">
                       <div class="metric-fill" style="width: 8%"></div>
                     </div>
-                    <span class="metric-value safe">8%</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">Lip-Sync</span>
-                    <div class="metric-bar">
-                      <div class="metric-fill" style="width: 12%"></div>
-                    </div>
-                    <span class="metric-value safe">12%</span>
+                    <span class="metric-value safe">None</span>
                   </div>
                 </div>
               </div>
@@ -158,59 +166,37 @@
           </div>
         </div>
 
-        <!-- Features Section -->
-        <section class="features">
-          <h2 class="section-title">Comprehensive Detection Suite</h2>
-          <div class="features-grid">
-            <div class="feature-card">
-              <div class="feature-icon">🎬</div>
-              <h3>Video Forensics</h3>
-              <p>
-                Frame-by-frame analysis using Vision Transformers to detect
-                manipulation artifacts and face swaps.
-              </p>
+        <!-- How It Works Section -->
+        <section id="howItWorks" class="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simplified forensic analysis in three easy steps.</p>
+            
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon-wrapper">
+                        <span class="step-icon">📤</span>
+                    </div>
+                    <h3 class="step-title">Upload Media</h3>
+                    <p class="step-desc">Drag and drop your video, audio, or image file. We support all major formats.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon-wrapper">
+                        <span class="step-icon">⚙️</span>
+                    </div>
+                    <h3 class="step-title">AI Analysis</h3>
+                    <p class="step-desc">Our multi-model engine analyzes frames, audio waves, and lip-sync patterns.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon-wrapper">
+                        <span class="step-icon">📄</span>
+                    </div>
+                    <h3 class="step-title">Get Report</h3>
+                    <p class="step-desc">Receive a detailed forensic report with confidence scores and evidence.</p>
+                </div>
             </div>
-            <div class="feature-card">
-              <div class="feature-icon">🔊</div>
-              <h3>Audio Authentication</h3>
-              <p>
-                AASIST-powered spoof detection for synthetic voice and audio
-                manipulation patterns.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">👄</div>
-              <h3>Lip-Sync Verification</h3>
-              <p>
-                Phoneme alignment analysis to detect audio-visual
-                synchronization mismatches.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🔗</div>
-              <h3>Multimodal Fusion</h3>
-              <p>
-                Cross-attention transformer combining all signals for calibrated
-                confidence scores.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">📊</div>
-              <h3>Evidence Timeline</h3>
-              <p>
-                Interactive timeline showing flagged segments with heatmaps and
-                spectrograms.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">📄</div>
-              <h3>Forensic Reports</h3>
-              <p>
-                AI-generated reports with evidence summaries and recommended
-                verification steps.
-              </p>
-            </div>
-          </div>
         </section>
       </section>
 
@@ -219,7 +205,7 @@
         <div class="upload-container">
           <h2 class="page-title">Analyze Media</h2>
           <p class="page-subtitle">
-            Upload a video, audio, or image file for deepfake analysis
+            Upload content for deepfake detection
           </p>
 
           <div class="upload-zone" id="uploadZone">
@@ -261,44 +247,40 @@
           <div class="upload-options">
             <h4>Analysis Options</h4>
             <div class="options-grid">
-              <label class="option-item">
-                <input type="checkbox" id="optVideo" checked />
+              <label class="option-card selected">
+                <input type="checkbox" id="optVideo" class="option-checkbox" checked />
                 <span class="option-label">Video Analysis</span>
               </label>
-              <label class="option-item">
-                <input type="checkbox" id="optAudio" checked />
+              <label class="option-card selected">
+                <input type="checkbox" id="optAudio" class="option-checkbox" checked />
                 <span class="option-label">Audio Analysis</span>
               </label>
-              <label class="option-item">
-                <input type="checkbox" id="optLipsync" checked />
-                <span class="option-label">Lip-Sync Verification</span>
+              <label class="option-card selected">
+                <input type="checkbox" id="optLipsync" class="option-checkbox" checked />
+                <span class="option-label">Lip-Sync Verify</span>
               </label>
-              <label class="option-item">
-                <input type="checkbox" id="optPrivacy" />
+              <label class="option-card">
+                <input type="checkbox" id="optPrivacy" class="option-checkbox" />
                 <span class="option-label">Privacy Mode</span>
               </label>
             </div>
           </div>
 
           <div class="upload-preview" id="uploadPreview" style="display: none">
-            <div class="preview-file">
-              <div class="file-icon">📄</div>
-              <div class="file-info">
-                <span class="file-name" id="fileName">video.mp4</span>
-                <span class="file-size" id="fileSize">25.4 MB</span>
-              </div>
-              <button class="btn btn-icon" id="removeFile">✕</button>
+            <div class="glass-card" style="padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; margin-top: 2rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 2rem;">📄</div>
+                    <div>
+                        <div id="fileName" style="font-weight: 600;">video.mp4</div>
+                        <div id="fileSize" style="color: var(--text-muted); font-size: 0.875rem;">25.4 MB</div>
+                    </div>
+                </div>
+                <button class="btn btn-icon" id="removeFile">✕</button>
             </div>
-            <button class="btn btn-primary btn-lg" id="startUploadBtn">
+            
+            <button class="btn btn-primary btn-lg btn-full" id="startUploadBtn" style="margin-top: 1.5rem;">
               <span>Start Analysis</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </button>
@@ -309,48 +291,99 @@
       <!-- Processing Page -->
       <section id="processing-page" class="page">
         <div class="processing-container">
+          <!-- Animated Scanner -->
           <div class="processing-animation">
             <div class="pulse-ring"></div>
             <div class="pulse-ring delay-1"></div>
             <div class="pulse-ring delay-2"></div>
             <div class="processing-icon">🔍</div>
           </div>
+          
           <h2 class="processing-title">Analyzing Media</h2>
-          <p class="processing-subtitle" id="processingStage">
-            Validating file...
-          </p>
+          <p class="processing-subtitle" id="processingStage">Initializing AI Engine...</p>
 
+          <!-- Progress Bar -->
           <div class="progress-container">
             <div class="progress-bar">
-              <div
-                class="progress-fill"
-                id="progressFill"
-                style="width: 0%"
-              ></div>
+              <div class="progress-fill" id="progressFill" style="width: 0%"></div>
             </div>
             <span class="progress-text" id="progressText">0%</span>
           </div>
 
-          <div class="processing-stages">
-            <div class="stage completed" id="stage-validating">
-              <span class="stage-icon">✓</span>
-              <span class="stage-label">Validating</span>
+          <!-- Detailed Stage Cards -->
+          <div class="processing-stages-detailed">
+            <div class="stage-card" id="stage-validating">
+              <div class="stage-card-icon">
+                <span class="stage-spinner"></span>
+                <span class="stage-check">✓</span>
+              </div>
+              <div class="stage-card-content">
+                <h4>File Validation</h4>
+                <p class="stage-detail">Verifying format, integrity, and extracting metadata</p>
+              </div>
+              <span class="stage-time" id="time-validating">--</span>
             </div>
-            <div class="stage active" id="stage-extracting">
-              <span class="stage-icon">⚡</span>
-              <span class="stage-label">Extracting</span>
+            
+            <div class="stage-card" id="stage-extracting">
+              <div class="stage-card-icon">
+                <span class="stage-spinner"></span>
+                <span class="stage-check">✓</span>
+              </div>
+              <div class="stage-card-content">
+                <h4>Frame Extraction</h4>
+                <p class="stage-detail">Sampling key frames and audio channels for analysis</p>
+              </div>
+              <span class="stage-time" id="time-extracting">--</span>
             </div>
-            <div class="stage" id="stage-transcribing">
-              <span class="stage-icon">○</span>
-              <span class="stage-label">Transcribing</span>
+            
+            <div class="stage-card" id="stage-transcribing">
+              <div class="stage-card-icon">
+                <span class="stage-spinner"></span>
+                <span class="stage-check">✓</span>
+              </div>
+              <div class="stage-card-content">
+                <h4>Audio Transcription</h4>
+                <p class="stage-detail">Converting speech to text using Whisper ASR</p>
+              </div>
+              <span class="stage-time" id="time-transcribing">--</span>
             </div>
-            <div class="stage" id="stage-analyzing">
-              <span class="stage-icon">○</span>
-              <span class="stage-label">Analyzing</span>
+            
+            <div class="stage-card" id="stage-analyzing">
+              <div class="stage-card-icon">
+                <span class="stage-spinner"></span>
+                <span class="stage-check">✓</span>
+              </div>
+              <div class="stage-card-content">
+                <h4>AI Deep Analysis</h4>
+                <p class="stage-detail">Running ViT, CNN, and Lip-Sync detection models</p>
+              </div>
+              <span class="stage-time" id="time-analyzing">--</span>
             </div>
-            <div class="stage" id="stage-reporting">
-              <span class="stage-icon">○</span>
-              <span class="stage-label">Reporting</span>
+            
+            <div class="stage-card" id="stage-reporting">
+              <div class="stage-card-icon">
+                <span class="stage-spinner"></span>
+                <span class="stage-check">✓</span>
+              </div>
+              <div class="stage-card-content">
+                <h4>Report Generation</h4>
+                <p class="stage-detail">Compiling forensic results and confidence scores</p>
+              </div>
+              <span class="stage-time" id="time-reporting">--</span>
+            </div>
+          </div>
+
+          <!-- Live Activity Log -->
+          <div class="activity-log glass-card">
+            <div class="activity-header">
+              <span class="activity-dot"></span>
+              <span>Live Activity</span>
+            </div>
+            <div class="activity-content" id="activityLog">
+              <div class="activity-item">
+                <span class="activity-time">00:00</span>
+                <span class="activity-text">Starting analysis pipeline...</span>
+              </div>
             </div>
           </div>
         </div>
@@ -358,34 +391,12 @@
 
       <!-- Results Page -->
       <section id="results-page" class="page">
-        <div class="results-container">
-          <div class="results-header">
+        <div class="results-container" style="padding: 6rem 2rem;">
+          <div class="results-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <h2>Analysis Complete</h2>
-            <div class="results-actions">
-              <button class="btn btn-ghost">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                  <polyline points="16 6 12 2 8 6" />
-                  <line x1="12" y1="2" x2="12" y2="15" />
-                </svg>
-                Share
-              </button>
+            <div class="results-actions" style="display: flex; gap: 1rem;">
               <button class="btn btn-primary" id="downloadReportBtn">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="7 10 12 15 17 10" />
                   <line x1="12" y1="15" x2="12" y2="3" />
@@ -421,92 +432,157 @@
             </div>
           </div>
 
+          <!-- Media Preview -->
+          <div class="media-preview-section" id="mediaPreviewSection" style="display: none;">
+            <h3>📹 Analyzed Media</h3>
+            <div class="media-preview-container">
+              <video id="mediaPreviewVideo" controls style="display: none;"></video>
+              <img id="mediaPreviewImage" alt="Uploaded media" style="display: none;" />
+            </div>
+          </div>
+
           <div class="results-grid">
-            <div class="modality-card">
+            <!-- Video Analysis Card -->
+            <div class="modality-card feature-card" id="videoCard">
               <div class="modality-header">
                 <span class="modality-icon">🎬</span>
                 <h4>Video Analysis</h4>
+                <span class="confidence-badge" id="videoConfidence">89%</span>
               </div>
               <div class="modality-score">
                 <div class="score-bar">
-                  <div
-                    class="score-fill safe"
-                    id="videoScoreBar"
-                    style="width: 15%"
-                  ></div>
+                  <div class="score-fill safe" id="videoScoreBar" style="width: 15%"></div>
                 </div>
                 <span class="score-text" id="videoScoreText">15%</span>
               </div>
-              <p class="modality-description">
+              <p class="modality-description" id="videoDescription">
                 No facial manipulation artifacts detected in analyzed frames.
               </p>
+              <div class="detail-stats" id="videoDetails">
+                <div class="stat-row"><span>Frames Analyzed</span><span id="framesAnalyzed">--</span></div>
+                <div class="stat-row"><span>Faces Detected</span><span id="facesDetected">--</span></div>
+                <div class="stat-row"><span>Manipulation Type</span><span id="manipulationType">None</span></div>
+                <div class="stat-row"><span>Blending Score</span><span id="blendingScore">--</span></div>
+              </div>
             </div>
 
-            <div class="modality-card">
+            <!-- Audio Analysis Card -->
+            <div class="modality-card feature-card" id="audioCard">
               <div class="modality-header">
                 <span class="modality-icon">🔊</span>
                 <h4>Audio Analysis</h4>
+                <span class="confidence-badge" id="audioConfidence">87%</span>
               </div>
               <div class="modality-score">
                 <div class="score-bar">
-                  <div
-                    class="score-fill safe"
-                    id="audioScoreBar"
-                    style="width: 8%"
-                  ></div>
+                  <div class="score-fill safe" id="audioScoreBar" style="width: 8%"></div>
                 </div>
                 <span class="score-text" id="audioScoreText">8%</span>
               </div>
-              <p class="modality-description">
+              <p class="modality-description" id="audioDescription">
                 Voice patterns consistent with natural speech.
               </p>
+              <div class="detail-stats" id="audioDetails">
+                <div class="stat-row"><span>Voice Cloning</span><span id="voiceCloning">Not Detected</span></div>
+                <div class="stat-row"><span>MFCC Anomaly</span><span id="mfccScore">--</span></div>
+                <div class="stat-row"><span>Naturalness</span><span id="naturalness">--</span></div>
+                <div class="stat-row"><span>Formant</span><span id="formantStatus">--</span></div>
+              </div>
             </div>
 
-            <div class="modality-card">
+            <!-- Lip-Sync Analysis Card -->
+            <div class="modality-card feature-card" id="lipsyncCard">
               <div class="modality-header">
                 <span class="modality-icon">👄</span>
                 <h4>Lip-Sync Analysis</h4>
+                <span class="confidence-badge" id="lipsyncConfidence">85%</span>
               </div>
               <div class="modality-score">
                 <div class="score-bar">
-                  <div
-                    class="score-fill safe"
-                    id="lipsyncScoreBar"
-                    style="width: 12%"
-                  ></div>
+                  <div class="score-fill safe" id="lipsyncScoreBar" style="width: 12%"></div>
                 </div>
                 <span class="score-text" id="lipsyncScoreText">12%</span>
               </div>
-              <p class="modality-description">
+              <p class="modality-description" id="lipsyncDescription">
                 Audio-visual synchronization within normal parameters.
               </p>
+              <div class="detail-stats" id="lipsyncDetails">
+                <div class="stat-row"><span>Sync Offset</span><span id="syncOffset">--</span></div>
+                <div class="stat-row"><span>Correlation</span><span id="correlation">--</span></div>
+                <div class="stat-row"><span>Phoneme Accuracy</span><span id="phonemeAccuracy">--</span></div>
+                <div class="stat-row"><span>Viseme Match</span><span id="visemeMatch">--</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artifacts Detection Panel -->
+          <div class="artifacts-panel glass-card" id="artifactsPanel">
+            <h3>🔍 Artifact Detection</h3>
+            <div class="artifacts-grid">
+              <div class="artifact-item" id="artifactBoundary">
+                <span class="artifact-indicator safe">✓</span>
+                <span>Boundary Artifacts</span>
+              </div>
+              <div class="artifact-item" id="artifactTemporal">
+                <span class="artifact-indicator safe">✓</span>
+                <span>Temporal Consistency</span>
+              </div>
+              <div class="artifact-item" id="artifactColor">
+                <span class="artifact-indicator safe">✓</span>
+                <span>Color Histogram</span>
+              </div>
+              <div class="artifact-item" id="artifactCompression">
+                <span class="artifact-indicator safe">✓</span>
+                <span>Compression</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Summary -->
+          <div class="technical-summary glass-card" id="technicalSummary">
+            <h3>⚙️ Technical Summary</h3>
+            <div class="tech-grid">
+              <div class="tech-item">
+                <span class="tech-label">Models Used</span>
+                <span class="tech-value" id="modelsUsed">--</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Inference Time</span>
+                <span class="tech-value" id="inferenceTime">--</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Resolution</span>
+                <span class="tech-value" id="mediaResolution">--</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Duration</span>
+                <span class="tech-value" id="mediaDuration">--</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">FPS</span>
+                <span class="tech-value" id="mediaFps">--</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Codec</span>
+                <span class="tech-value" id="mediaCodec">--</span>
+              </div>
             </div>
           </div>
 
           <!-- Timeline -->
           <div class="timeline-section">
-            <h3>Evidence Timeline</h3>
-            <div class="timeline-container">
-              <div class="timeline-track" id="timeline">
-                <div
-                  class="timeline-marker warning"
-                  style="left: 25%"
-                  data-time="00:15"
-                  data-type="audio"
-                >
-                  <div class="marker-tooltip">Minor audio anomaly at 00:15</div>
+            <h3>📊 Evidence Timeline</h3>
+            <div class="glass-card timeline-card" id="timelineContainer">
+                <!-- Populated by JavaScript -->
+                <div class="timeline-empty">
+                    <span>✓</span>
+                    <p>No anomalies detected in timeline</p>
                 </div>
-              </div>
-              <div class="timeline-labels">
-                <span>00:00</span>
-                <span>00:30</span>
-                <span>01:00</span>
-              </div>
             </div>
           </div>
 
           <!-- New Analysis Button -->
-          <div class="results-footer">
+          <div class="results-footer" style="text-align: center; margin-top: 4rem;">
             <button class="btn btn-ghost btn-lg" id="newAnalysisBtn">
               <svg
                 width="20"
@@ -527,29 +603,98 @@
       <!-- Reports Page -->
       <section id="reports-page" class="page">
         <div class="reports-container">
-          <h2 class="page-title">Analysis History</h2>
-          <div class="reports-list" id="reportsList">
-            <div class="report-item">
-              <div class="report-thumbnail">📹</div>
-              <div class="report-info">
-                <h4>interview_clip.mp4</h4>
-                <span class="report-date">Jan 30, 2026 • 2:45 PM</span>
-              </div>
-              <div class="report-verdict authentic">
-                <span>AUTHENTIC</span>
-                <span class="verdict-score">12%</span>
-              </div>
-              <button class="btn btn-ghost btn-sm">View</button>
-            </div>
-            <div class="empty-state" id="emptyReports" style="display: none">
-              <div class="empty-icon">📋</div>
-              <h3>No reports yet</h3>
-              <p>Start your first analysis to see reports here</p>
-              <button class="btn btn-primary" id="emptyStartBtn">
-                Start Analysis
-              </button>
-            </div>
+          <h2 class="page-title">Analysis Reports</h2>
+          
+          <!-- Reports Tabs -->
+          <div class="reports-tabs">
+              <button class="report-tab active" data-view="dashboard">Dashboard</button>
+              <button class="report-tab" data-view="history">History</button>
           </div>
+
+          <!-- Dashboard View -->
+          <div id="view-dashboard" class="dashboard-view active">
+              <div class="stats-grid">
+                  <div class="glass-card stat-card">
+                      <span class="stat-title">Total Scans</span>
+                      <span class="stat-value" id="statTotal">--</span>
+                      <div class="stat-trend">
+                          <span>All time analysis</span>
+                      </div>
+                  </div>
+                  <div class="glass-card stat-card">
+                      <span class="stat-title">Threat Level</span>
+                      <span class="stat-value" id="statFakePercent">--%</span>
+                      <div class="stat-trend" id="statTrendIcon">
+                          <span>Fake detection rate</span>
+                      </div>
+                  </div>
+                  <div class="glass-card stat-card">
+                      <span class="stat-title">Avg Confidence</span>
+                      <span class="stat-value" id="statConfidence">--%</span>
+                      <div class="stat-trend down">
+                          <span>Model certainty</span>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="charts-grid">
+                  <div class="glass-card chart-card">
+                      <div class="chart-header">
+                          <h3>Authenticity Distribution</h3>
+                      </div>
+                      <div class="simple-bar-chart">
+                          <div class="chart-bar-container">
+                              <span class="chart-label">Real</span>
+                              <div class="chart-track">
+                                  <div class="chart-bar" style="width: 0%; background: var(--success);" id="barReal"></div>
+                              </div>
+                              <span class="chart-label" id="valReal">0%</span>
+                          </div>
+                          <div class="chart-bar-container">
+                              <span class="chart-label">Fake</span>
+                              <div class="chart-track">
+                                  <div class="chart-bar" style="width: 0%; background: var(--error);" id="barFake"></div>
+                              </div>
+                              <span class="chart-label" id="valFake">0%</span>
+                          </div>
+                           <div class="chart-bar-container">
+                              <span class="chart-label">Suspicious</span>
+                              <div class="chart-track">
+                                  <div class="chart-bar" style="width: 0%; background: var(--warning);" id="barSuspicious"></div>
+                              </div>
+                              <span class="chart-label" id="valSuspicious">0%</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="glass-card chart-card">
+                      <div class="chart-header">
+                          <h3>Recent Alerts</h3>
+                      </div>
+                      <div class="recent-threats" id="recentAlerts">
+                          <!-- Filled by JS -->
+                          <p class="text-muted" style="text-align: center; margin-top: 2rem;">No recent threats</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- History View -->
+          <div id="view-history" class="dashboard-view">
+              <div class="reports-list" id="reportsList">
+                <!-- Populated via JS -->
+              </div>
+              
+              <div class="empty-state" id="emptyReports" style="display: none">
+                <div class="empty-icon">📂</div>
+                <h3>No reports yet</h3>
+                <p style="margin-bottom: 2rem; color: var(--text-muted);">Start your first analysis to see reports here</p>
+                <button class="btn btn-primary" id="emptyStartBtn">
+                  Start Analysis
+                </button>
+              </div>
+          </div>
+
         </div>
       </section>
 
@@ -557,43 +702,47 @@
       <section id="settings-page" class="page">
         <div class="settings-container">
           <h2 class="page-title">Settings</h2>
-          <div class="settings-section">
-            <h3>Privacy & Data</h3>
-            <div class="setting-item">
-              <div class="setting-info">
-                <h4>Auto-delete uploads</h4>
-                <p>Automatically delete uploaded files after analysis</p>
+          
+          <div class="settings-grid">
+              <div class="settings-section">
+                <h3>Privacy & Data</h3>
+                <div class="glass-card setting-item">
+                  <div class="setting-info">
+                    <h4>Auto-delete uploads</h4>
+                    <p>Automatically delete uploaded files after analysis</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" data-setting="autoDelete" checked />
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="glass-card setting-item">
+                  <div class="setting-info">
+                    <h4>Data retention period</h4>
+                    <p>How long to keep analysis reports</p>
+                  </div>
+                  <select class="setting-select" data-setting="retention">
+                    <option value="7">7 days</option>
+                    <option value="30" selected>30 days</option>
+                    <option value="90">90 days</option>
+                    <option value="365">1 year</option>
+                  </select>
+                </div>
               </div>
-              <label class="toggle">
-                <input type="checkbox" checked />
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-            <div class="setting-item">
-              <div class="setting-info">
-                <h4>Data retention period</h4>
-                <p>How long to keep analysis reports</p>
+              
+              <div class="settings-section">
+                <h3>Analysis Preferences</h3>
+                <div class="glass-card setting-item">
+                  <div class="setting-info">
+                    <h4>Default analysis options</h4>
+                    <p>Enable all detection modalities by default</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" data-setting="defaultAllModalities" checked />
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
               </div>
-              <select class="setting-select">
-                <option>7 days</option>
-                <option selected>30 days</option>
-                <option>90 days</option>
-                <option>1 year</option>
-              </select>
-            </div>
-          </div>
-          <div class="settings-section">
-            <h3>Analysis Preferences</h3>
-            <div class="setting-item">
-              <div class="setting-info">
-                <h4>Default analysis options</h4>
-                <p>Enable all detection modalities by default</p>
-              </div>
-              <label class="toggle">
-                <input type="checkbox" checked />
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
           </div>
         </div>
       </section>
@@ -608,36 +757,66 @@
           <button class="auth-tab active" data-tab="login">Login</button>
           <button class="auth-tab" data-tab="signup">Sign Up</button>
         </div>
+        
+        <!-- Login Form -->
         <form class="auth-form" id="loginForm">
           <div class="form-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required />
+            <div class="input-wrapper">
+                <span class="input-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </span>
+                <input type="email" placeholder="Enter your email" required />
+            </div>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <div class="input-wrapper">
+                <span class="input-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </span>
+                <input type="password" placeholder="Enter your password" required />
+                <button type="button" class="password-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary btn-lg btn-full">
             Login
           </button>
         </form>
+
+        <!-- Signup Form -->
         <form class="auth-form" id="signupForm" style="display: none">
           <div class="form-group">
             <label>Full Name</label>
-            <input type="text" placeholder="Enter your name" />
+            <div class="input-wrapper">
+                <span class="input-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </span>
+                <input type="text" placeholder="Enter user name" required />
+            </div>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required />
+            <div class="input-wrapper">
+                <span class="input-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </span>
+                <input type="email" placeholder="Enter your email" required />
+            </div>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              placeholder="Create a password"
-              required
-              minlength="8"
-            />
+            <div class="input-wrapper">
+                <span class="input-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </span>
+                <input type="password" placeholder="Create a password" required minlength="8" />
+                <button type="button" class="password-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary btn-lg btn-full">
             Create Account
@@ -646,7 +825,10 @@
       </div>
     </div>
 
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
     <!-- Scripts -->
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=2.0.1"></script>
   </body>
 </html>
