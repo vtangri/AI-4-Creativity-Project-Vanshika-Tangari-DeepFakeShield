@@ -62,7 +62,7 @@ Before setting up the project, ensure you have the following installed:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/vtangri/DeepFakeShield.git
+git clone https://github.com/vtangri/AI-4-Creativity-Project-Vanshika-Tangari-DeepFakeShield
 cd DeepFakeShield
 ```
 
