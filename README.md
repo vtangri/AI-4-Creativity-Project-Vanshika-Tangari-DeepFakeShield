@@ -14,7 +14,7 @@
 
 | Field              | Details                              |
 | ------------------ | ------------------------------------ |
-| **Student Name**   | Vanshika Tangari                     |
+| **Student Name**   | Vanshika Tangri                     |
 | **Student Number** | 2315843                              |
 | **Project**        | AI-4-Creativity                      |
 | **Project Video**  | [Link to project video recording](#) |
