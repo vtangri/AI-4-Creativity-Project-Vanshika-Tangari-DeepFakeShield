@@ -47,11 +47,24 @@ async def simulate_analysis_pipeline(job_id: UUID):
         # Generate realistic mock results
         # DEMO MODE: Check filename for keywords to force detection
         filename = job.media_item.original_filename.lower() if job.media_item else ""
-        fake_keywords = ["fake", "deep", "manipulated", "synthetic", "ai", "gen", "test", "demo"]
-        is_known_fake = any(k in filename for k in fake_keywords)
+        fake_keywords = ["fake", "deep", "manipulated", "synthetic", "ai", "gen", "test", "demo", "deepfake"]
+        auth_keywords = ["authentic", "real", "safe", "original", "verified", "true"]
         
-        is_fake = is_known_fake or (random.random() < 0.35)  # Force fake if keyword match, else 35% chance
-        score = random.uniform(0.78, 0.96) if is_fake else random.uniform(0.04, 0.22)
+        is_known_fake = any(k in filename for k in fake_keywords)
+        is_known_auth = any(k in filename for k in auth_keywords)
+        
+        # Priority logic: 
+        # 1. Force Fake if fake keyword matches
+        # 2. Force Authentic if auth keyword matches (even if it matches a fake keyword, auth wins for safety)
+        # 3. Else, low random chance for fake
+        if is_known_auth:
+            is_fake = False
+        elif is_known_fake:
+            is_fake = True
+        else:
+            is_fake = (random.random() < 0.05)  # Reduced from 35% to 5% for less noise
+            
+        score = random.uniform(0.78, 0.96) if is_fake else random.uniform(0.02, 0.15)
         label = "LIKELY_FAKE" if is_fake else "AUTHENTIC"
         
         # Modality scores with slight variation

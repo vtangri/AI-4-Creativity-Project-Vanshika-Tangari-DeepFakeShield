@@ -1,0 +1,33 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+venv/
+env/
+
+# Logs
+*.log
+test_output*.txt
+
+# Databases
+*.db
+*.sqlite3
+
+# OS files
+.DS_Store
+
+# Storage
+backend/storage/
+storage/
+data/
+
+# Verification scripts (optional to exclude, but let's keep the core clean)
+# verify_fix.py
+# verify_training.py

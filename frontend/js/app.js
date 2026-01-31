@@ -585,8 +585,12 @@ function showMediaPreview() {
     const previewVideo = document.getElementById('mediaPreviewVideo');
     const previewImage = document.getElementById('mediaPreviewImage');
     
-    if (!previewSection || !state.selectedFile) {
-        if (previewSection) previewSection.style.display = 'none';
+    if (!previewSection) return;
+
+    if (!state.selectedFile) {
+        // If we don't have the file (e.g. from history), hide preview section
+        // or show a generic placeholder if we had thumbnails (not implemented yet)
+        previewSection.style.display = 'none';
         return;
     }
     
@@ -927,15 +931,35 @@ function renderDashboard(reports) {
             const type = r.media_type ? r.media_type.charAt(0).toUpperCase() + r.media_type.slice(1) : 'Media';
             const icon = r.media_type === 'audio' ? '🔊' : (r.media_type === 'image' ? '🖼️' : '🎬');
             return `
-            <div class="threat-item">
+            <div class="threat-item" style="cursor: pointer;" data-job-id="${r.job_id}">
                 <div class="threat-icon">${icon}</div>
                 <div class="threat-info">
                     <h4>Fake ${type} Detected</h4>
                     <p>${new Date(r.created_at || r.generated_at).toLocaleDateString()} • Score: ${Math.round(r.overall_score * 100)}%</p>
                 </div>
-                <button class="btn btn-sm btn-ghost" style="margin-left: auto; color: var(--accent);">View</button>
+                <button class="btn btn-sm btn-ghost view-alert-btn" style="margin-left: auto; color: var(--accent);" data-job-id="${r.job_id}">View</button>
             </div>
         `}).join('');
+
+        // Attach listeners to alerts
+        alertsContainer.querySelectorAll('.threat-item').forEach(item => {
+            item.addEventListener('click', async () => {
+                const jobId = item.dataset.jobId;
+                if (!jobId) return;
+                try {
+                    showToast('Loading analysis details...', 'info');
+                    navigateTo('processing');
+                    resetAnalysisState();
+                    updateStatus('done', 100, 'Retrieving results...');
+                    const result = await api.getJobResult(jobId);
+                    showResults(result);
+                } catch (err) {
+                    console.error('Alert Click Error:', err);
+                    showToast('Failed to load details: ' + err.message, 'error');
+                    navigateTo('reports');
+                }
+            });
+        });
     }
 }
 
@@ -964,13 +988,13 @@ function renderReportsList(reports) {
         const statusStyle = statusClass === 'suspicious' ? 'background: rgba(245, 158, 11, 0.2); color: var(--warning);' : '';
 
         return `
-        <div class="glass-card report-item">
+        <div class="glass-card report-item" data-job-id="${r.job_id}">
             <div class="report-left">
                 <div class="report-thumbnail">
                     ${r.media_type === 'audio' ? '🔊' : '🎬'}
                 </div>
                 <div class="report-meta">
-                    <h4>Analysis #${r.id.slice(0, 8)}</h4>
+                    <h4>Analysis #${r.job_id.slice(0, 8)}</h4>
                     <span class="report-date">${new Date(r.created_at).toLocaleString()}</span>
                 </div>
             </div>
@@ -978,7 +1002,7 @@ function renderReportsList(reports) {
                     <div class="report-status ${statusClass}" style="${statusStyle}">
                     ${statusText} (${score}%)
                     </div>
-                <button class="btn btn-ghost btn-sm download-pdf-btn" data-job-id="${r.id}">
+                <button class="btn btn-ghost btn-sm download-pdf-btn" data-job-id="${r.job_id}">
                     Download PDF
                 </button>
             </div>
@@ -1000,7 +1024,36 @@ function renderReportsList(reports) {
             }
         });
     });
-    
+
+    // Attach event listeners to report cards for details view
+    container.querySelectorAll('.report-item').forEach(item => {
+        item.addEventListener('click', async (e) => {
+            // Don't trigger if clicking the download button
+            if (e.target.closest('.download-pdf-btn')) return;
+            
+            const jobId = item.dataset.jobId;
+            
+            if (jobId) {
+                try {
+                    showToast('Loading analysis details...', 'info');
+                    
+                    // Switch to processing/loading state briefly
+                    navigateTo('processing');
+                    resetAnalysisState();
+                    updateStatus('done', 100, 'Retrieving results...');
+                    
+                    const result = await api.getJobResult(jobId);
+                    showResults(result);
+                    
+                } catch (err) {
+                    console.error('History Click Error:', err);
+                    showToast('Failed to load details: ' + err.message, 'error');
+                    navigateTo('reports');
+                }
+            }
+        });
+    });
+
     // Refresh tilt effect for new items
     VFX.refresh();
 }

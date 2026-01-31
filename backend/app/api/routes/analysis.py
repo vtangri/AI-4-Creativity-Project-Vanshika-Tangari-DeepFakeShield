@@ -37,21 +37,17 @@ async def start_analysis(
     db: AsyncSession = Depends(get_async_db)
 ):
     """Start a new analysis job for a media item."""
-    # Debug: Print what we're looking for
-    print(f"DEBUG: Looking for media_id={request.media_id}, user_id={current_user.id}")
-    
-    # First try to find the media item by ID only
+    # Find the media item and verify ownership
     result = await db.execute(
-        select(MediaItem).where(MediaItem.id == request.media_id)
+        select(MediaItem).where(
+            MediaItem.id == request.media_id,
+            MediaItem.user_id == current_user.id
+        )
     )
-    any_media = result.scalar_one_or_none()
+    media_item = result.scalar_one_or_none()
     
-    if any_media:
-        print(f"DEBUG: Found media item belongs to user_id={any_media.user_id}")
-        # Use this media item if it exists (skip user check for now to debug)
-        media_item = any_media
-    else:
-        print(f"DEBUG: No media item found with id={request.media_id}")
+    if not media_item:
+        print(f"DEBUG: Media item not found or unauthorized for id={request.media_id}, user_id={current_user.id}")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Media item not found"
@@ -111,9 +107,14 @@ async def get_analysis_status(
     db: AsyncSession = Depends(get_async_db)
 ):
     """Get the current status of an analysis job."""
-    # Simplified query - just find by job ID
+    # Find by job ID and verify ownership through MediaItem
     result = await db.execute(
-        select(AnalysisJob).where(AnalysisJob.id == job_id)
+        select(AnalysisJob)
+        .join(MediaItem)
+        .where(
+            AnalysisJob.id == job_id,
+            MediaItem.user_id == current_user.id
+        )
     )
     job = result.scalar_one_or_none()
     
@@ -143,14 +144,18 @@ async def get_analysis_result(
     db: AsyncSession = Depends(get_async_db)
 ):
     """Get the full results of a completed analysis job."""
-    # Simplified query - just find by job ID
+    # Find by job ID and verify ownership through MediaItem
     result = await db.execute(
         select(AnalysisJob)
         .options(
             selectinload(AnalysisJob.segments),
             selectinload(AnalysisJob.model_runs)
         )
-        .where(AnalysisJob.id == job_id)
+        .join(MediaItem)
+        .where(
+            AnalysisJob.id == job_id,
+            MediaItem.user_id == current_user.id
+        )
     )
     job = result.scalar_one_or_none()
     

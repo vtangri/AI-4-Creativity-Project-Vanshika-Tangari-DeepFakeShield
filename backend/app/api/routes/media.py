@@ -94,9 +94,12 @@ async def upload_media(
     # Compute hash
     sha256 = await compute_sha256(str(file_path))
     
-    # Check for duplicate
+    # Check for duplicate (within same user scope)
     result = await db.execute(
-        select(MediaItem).where(MediaItem.sha256 == sha256)
+        select(MediaItem).where(
+            MediaItem.sha256 == sha256,
+            MediaItem.user_id == current_user.id
+        )
     )
     existing = result.scalar_one_or_none()
     if existing:

@@ -34,6 +34,7 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        render_as_batch=True,
     )
 
     with context.begin_transaction():
@@ -49,9 +50,19 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
+        def process_revision_directives(context, revision, directives):
+            if config.get_main_option("sqlalchemy.url").startswith("sqlite"):
+                for directive in directives:
+                    for op in directive.upgrade_ops.ops:
+                        if hasattr(op, 'type_') and str(op.type_) == 'UUID':
+                             op.type_ = sa.CHAR(32)
+
         context.configure(
             connection=connection, 
-            target_metadata=target_metadata
+            target_metadata=target_metadata,
+            render_as_batch=True,
+            # Handle SQLite UUID limitation
+            user_module_prefix="sa.",
         )
 
         with context.begin_transaction():

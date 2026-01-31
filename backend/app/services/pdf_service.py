@@ -497,6 +497,97 @@ class PDFReportGenerator:
         elements.append(Spacer(1, 20))
         return elements
 
+    def _build_segments_section(self, segments: List[Dict]) -> List:
+        """Build flagged segments timeline section."""
+        elements = []
+        elements.append(Paragraph("Suspicious Segments Timeline", self.styles['DSSectionHeader']))
+        
+        data = [["Time Range", "Type", "Score"]]
+        
+        style_cmds = [
+             ('BACKGROUND', (0,0), (-1,0), COLORS['muted']),
+             ('TEXTCOLOR', (0,0), (-1,0), colors.white),
+             ('GRID', (0,0), (-1,-1), 0.5, COLORS['light']),
+        ]
+        
+        row_idx = 1
+        for seg in segments:
+            start = seg.get('start_ms', 0) / 1000.0
+            end = seg.get('end_ms', 0) / 1000.0
+            score = seg.get('score', 0)
+            stype = seg.get('segment_type', 'unknown').upper()
+            
+            data.append([
+                f"{start:.1f}s - {end:.1f}s",
+                stype,
+                f"{int(score*100)}%"
+            ])
+            
+            if score > 0.7:
+                 style_cmds.append(('TEXTCOLOR', (2, row_idx), (2, row_idx), COLORS['error']))
+            elif score > 0.4:
+                 style_cmds.append(('TEXTCOLOR', (2, row_idx), (2, row_idx), COLORS['warning']))
+            
+            row_idx += 1
+            
+        t = Table(data, colWidths=[2*inch, 2*inch, 1.5*inch])
+        t.setStyle(TableStyle(style_cmds))
+        elements.append(t)
+        elements.append(Spacer(1, 20))
+        return elements
+
+    def _build_summary_section(self, text: str) -> List:
+        """Build summary section."""
+        elements = []
+        elements.append(Paragraph("Forensic Summary", self.styles['DSSectionHeader']))
+        elements.append(Paragraph(text, self.styles['DSBodyText']))
+        elements.append(Spacer(1, 20))
+        return elements
+
+    def _build_recommendations_section(self) -> List:
+        """Build recommendations."""
+        elements = []
+        elements.append(Paragraph("Recommendations", self.styles['DSSectionHeader']))
+        
+        recs = [
+            "• Verify the original source of the media file.",
+            "• Check for metadata consistency using external tools.",
+            "• Use this report as a preliminary screening tool, not absolute proof."
+        ]
+        
+        for r in recs:
+            elements.append(Paragraph(r, self.styles['DSBodyText']))
+        
+        elements.append(Spacer(1, 15))
+        return elements
+
+    def _build_limitations_section(self) -> List:
+        """Build limitations."""
+        elements = []
+        elements.append(Paragraph("Limitations & Disclaimer", self.styles['DSSectionHeader']))
+        
+        lims = [
+            "• Deepfake detection models are probabilistic and may produce false positives/negatives.",
+            "• Performance may degrade on highly compressed or low-resolution media.",
+            "• This report does not constitute legal evidence."
+        ]
+        
+        for l in lims:
+            elements.append(Paragraph(l, self.styles['DSBodyText']))
+            
+        elements.append(Spacer(1, 20))
+        return elements
+
+    def _build_footer(self, job_id: str) -> List:
+        """Build footer."""
+        elements = []
+        elements.append(HRFlowable(width="100%", thickness=1, color=COLORS['light']))
+        elements.append(Spacer(1, 10))
+        
+        text = f"DeepFakeShield Analysis Report • ID: {job_id} • {datetime.utcnow().year}"
+        elements.append(Paragraph(text, self.styles['ReportSubtitle']))
+        return elements
+
 # Singleton instance
 pdf_generator = PDFReportGenerator()
 

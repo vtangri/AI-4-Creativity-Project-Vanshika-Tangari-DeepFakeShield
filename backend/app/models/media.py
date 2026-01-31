@@ -1,7 +1,7 @@
 """
 Media item model for uploaded files.
 """
-from sqlalchemy import Column, String, Integer, ForeignKey, DateTime, Text
+from sqlalchemy import Column, String, Integer, ForeignKey, DateTime, Text, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID, JSON
 from sqlalchemy.orm import relationship
 
@@ -18,7 +18,7 @@ class MediaItem(Base):
     # File info
     filename = Column(String(255), nullable=False)
     original_filename = Column(String(255), nullable=False)
-    sha256 = Column(String(64), unique=True, index=True, nullable=False)
+    sha256 = Column(String(64), unique=False, index=True, nullable=False)
     file_size = Column(Integer, nullable=False)  # bytes
     
     # Media type
@@ -38,6 +38,10 @@ class MediaItem(Base):
     # Retention
     expires_at = Column(DateTime, nullable=True)
     
+    __table_args__ = (
+        UniqueConstraint('sha256', 'user_id', name='uq_media_sha256_user'),
+    )
+
     # Relationships
     user = relationship("User", back_populates="media_items")
     analysis_jobs = relationship("AnalysisJob", back_populates="media_item", cascade="all, delete-orphan")

@@ -437,3 +437,30 @@ INFO:     127.0.0.1:53890 - "OPTIONS /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-808
 INFO:     127.0.0.1:53890 - "GET /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-80856b955344/report.pdf HTTP/1.1" 404 Not Found
 INFO:     127.0.0.1:53948 - "GET /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-80856b955344/report.pdf HTTP/1.1" 401 Unauthorized
 INFO:     127.0.0.1:53952 - "GET /api/v1/reports/b4ce00c6-a65f-46ee-b8ad-80856b955344/report.pdf HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54757 - "OPTIONS /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54757 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54757 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54757 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54761 - "OPTIONS /api/v1/media/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54761 - "POST /api/v1/media/upload HTTP/1.1" 201 Created
+INFO:     127.0.0.1:54761 - "OPTIONS /api/v1/analysis/start HTTP/1.1" 200 OK
+DEBUG: Looking for media_id=95cf1fe2-9dc6-4d51-9786-656661b46ef4, user_id=82be1376-b55b-4db4-9bdb-940ca9ecd484
+DEBUG: Found media item belongs to user_id=8999da7d-bb0b-4e5a-be05-175c0f042efd
+INFO:     127.0.0.1:54761 - "POST /api/v1/analysis/start HTTP/1.1" 201 Created
+INFO:     127.0.0.1:54761 - "OPTIONS /api/v1/analysis/3fa73ba1-89f2-4b49-8d9a-4f4de8d9de51/status HTTP/1.1" 200 OK
+DEBUG: Found job id=3fa73ba1-89f2-4b49-8d9a-4f4de8d9de51, stage=DONE, status=DONE
+INFO:     127.0.0.1:54761 - "GET /api/v1/analysis/3fa73ba1-89f2-4b49-8d9a-4f4de8d9de51/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54761 - "OPTIONS /api/v1/analysis/3fa73ba1-89f2-4b49-8d9a-4f4de8d9de51/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54761 - "GET /api/v1/analysis/3fa73ba1-89f2-4b49-8d9a-4f4de8d9de51/result HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54763 - "OPTIONS /api/v1/reports/3fa73ba1-89f2-4b49-8d9a-4f4de8d9de51/report.pdf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54763 - "GET /api/v1/reports/3fa73ba1-89f2-4b49-8d9a-4f4de8d9de51/report.pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54770 - "OPTIONS /api/v1/reports/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54770 - "GET /api/v1/reports/ HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [85302]
+INFO:     Started server process [93873]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

@@ -30,7 +30,7 @@ async def generate_report(
     """Generate or regenerate a forensic report for an analysis job."""
     result = await db.execute(
         select(AnalysisJob)
-        .join(MediaItem)
+        .join(MediaItem, AnalysisJob.media_id == MediaItem.id)
         .where(
             AnalysisJob.id == job_id,
             MediaItem.user_id == current_user.id
